@@ -46,35 +46,41 @@ exports.UserSchema = mongoose.model("User", {
 	},
 });
 
-// exports.CarSchema = mongoose.model("Car", {
-// 	plateNo: {
-// 		type: String,
-// 		unique: true,
-// 		required: true,
-// 		dropDups: true,
-// 	},
-// 	brand: String,
-// 	type: String,
-// 	year: Number,
-// 	rentPrice: {
-// 		perDay: Number,
-// 		perHour: Number,
-// 	},
-// 	picture: {
-// 		data: Buffer,
-// 		contentType: String,
-// 	},
-// 	status: {
-// 		type: String,
-// 		enum: ["Available", "Not Available"],
-// 		require: true,
-// 		default: "Available",
-// 	},
-// 	user: {
-// 		username: String,
-// 		email: String,
-// 	},
-// });
+exports.RoomSchema = mongoose.model("Room", {
+	roomNo: {
+		type: String,
+		unique: true,
+		required: true,
+		dropDups: true,
+	},
+	type: {
+		type: String,
+		required: true,
+		enum: ["Standard", "Superior", "Deluxe", "Presidential Suite"],
+	},
+	price: {
+		type: Number,
+		required: true,
+	},
+	facility: {
+		type: String,
+		required: true,
+	},
+	picture: {
+		data: Buffer,
+		contentType: String,
+	},
+	status: {
+		type: String,
+		required: true,
+		enum: ["Available", "Not Available"],
+		default: "Available",
+	},
+	createdBy: {
+		type: String,
+		required: true,
+	},
+});
 
 // exports.BorrowSchema = mongoose.model("Borrow", {
 // 	unixBookDate: Number, //when they do book //date and time
