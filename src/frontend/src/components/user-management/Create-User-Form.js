@@ -1,55 +1,146 @@
-export default function CreateUser() {
-    return (
-        <div className="card" style={{
-            margin: "20px",
-            color: "#DBE2EF"
-        }}>
-            <form className="card-body">
-            <h1 className="mb-3">Create User</h1>
-                <div className="mb-3">
-                    <label className="form-label">Nama</label>
-                    <input type="text" className="form-control" />
-                </div>
-                <select className="form-select mb-3" aria-label=".form-select-lg example" defaultValue={'role'}>
-                    <option value="role">Pilih Role?</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Resepsionis</option>
-                </select>
-                <div className="mb-3">
-                    <label className="form-label">Username</label>
-                    <input type="text" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1"/>
-                </div>
-                <div className="mb-3 form-check">
-                    <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                    <label className="form-check-label">Check me out</label>
-                </div>
-                <div className="row">
-                <div className="col">
-				    <div className="d-grid gap-1">
-                        <button
-                            className="btn btn-success shadow"
-                            type="button"
-                            style={{borderRadius: '20px'}}>
-                            Create
-                        </button>								
-				    </div>			
+import Loader from "../../components/Loader";
+
+export default function CreateUserForm(props) {
+	const style = {
+		page: {
+			padding: "30px",
+			paddingTop: "70px",
+			backgroundColor: "#F9F7F7",
+		},
+		title: {
+			color: "#112D4E",
+		},
+		label: {
+			color: "#3F72AF",
+		},
+		input: {
+			borderRadius: "10px",
+			borderColor: "#DBE2EF",
+			color: "#3F72AF",
+		},
+		loader: {
+			color: "#3F72AF",
+		},
+		card: {
+			border: "none",
+			borderRadius: "20px",
+		},
+		button: {
+			borderRadius: "15px",
+		},
+	};
+
+	return (
+		<form onSubmit={props.handleSubmit}>
+			<div className="mb-3">
+				<label
+					className="form-label"
+					style={style.label}
+					htmlFor="name"
+				>
+					Name
+				</label>
+				<input
+					type="text"
+					className="form-control"
+					id="name"
+					name="name"
+					value={props.user.name}
+					onChange={props.handleChange}
+					style={style.input}
+				/>
+			</div>
+			<div className="mb-3">
+				<label
+					className="form-label"
+					style={style.label}
+					htmlFor="role"
+				>
+					Role
+				</label>
+				<select
+					className="form-select"
+					style={style.input}
+					id="role"
+					name="role"
+					value={props.user.role}
+					onChange={props.handleChange}
+				>
+					<option value="admin">Admin</option>
+					<option value="receptionist">Receptionist</option>
+				</select>
+			</div>
+			<div className="mb-3">
+				<label
+					className="form-label"
+					style={style.label}
+					htmlFor="username"
+				>
+					Username
+				</label>
+				<input
+					type="text"
+					className="form-control"
+					style={style.input}
+					id="username"
+					name="username"
+					value={props.user.username}
+					onChange={props.handleChange}
+				/>
+			</div>
+			<div className="mb-5">
+				<label
+					className="form-label"
+					style={style.label}
+					htmlFor="password"
+				>
+					Password
+				</label>
+				<input
+					type="password"
+					className="form-control"
+					style={style.input}
+					id="password"
+					name="password"
+					value={props.user.password}
+					onChange={props.handleChange}
+					autoComplete="on"
+				/>
+			</div>
+			{props.isLoading ? (
+				<Loader style={style} />
+			) : (
+				<div className="row">
+					<div className="col">
+						<div className="d-grid gap-2">
+							<button
+								className="btn btn-dark shadow"
+								type="button"
+								style={style.button}
+							>
+								Cancel
+							</button>
+						</div>
+					</div>
+					<div className="col">
+						<div className="d-grid gap-1">
+							<button
+								className="btn btn-success shadow"
+								type="submit"
+								style={style.button}
+								disabled={
+									props.user.name === "" ||
+									props.user.role === "" ||
+									props.user.username === "" ||
+									props.user.password === ""
+								}
+							>
+								Create
+							</button>
+						</div>
+					</div>
 				</div>
-                <div className="col">
-				    <div className="d-grid gap-2">
-                        <button
-                            className="btn btn-dark shadow"
-                            type="button"
-                            style={{borderRadius: '20px'}}>
-                            Cancel
-                        </button>								
-				    </div>			
-				</div>
-                </div>		
-            </form>
-        </div>
-    )
+			)}
+		</form>
+	);
 }
