@@ -117,6 +117,7 @@ export default function CreateUserForm(props) {
 								className="btn btn-dark shadow"
 								type="button"
 								style={style.button}
+								onClick={() => props.handleCancel()}
 							>
 								Cancel
 							</button>

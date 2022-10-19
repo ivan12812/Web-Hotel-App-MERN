@@ -50,9 +50,9 @@ function App() {
 								element={<CreateBorrowPage />}
 							/>
 						</Route>
-					</Route>
-					<Route path="master">
-						<Route path="cars">
+					</Route> */}
+					<Route path="management">
+						{/* <Route path="cars">
 							<Route
 								index
 								element={<CarsListPage />}
@@ -65,22 +65,16 @@ function App() {
 								path="update/:id"
 								element={<UpdateCarPage />}
 							/>
-						</Route>
+						</Route> */}
 						<Route path="users">
-							<Route
-								index
-								element={<UserListPage />}
-							/>
-							<Route
-								path="create"
-								element={<CreateUserPage />}
-							/>
-							<Route
+							<Route index element={<UserListPage />} />
+							<Route path="create" element={<CreateUserPage />} />
+							{/* <Route
 								path="update/:id"
 								element={<UpdateUserPage />}
-							/>
+							/> */}
 						</Route>
-					</Route> */}
+					</Route>
 				</Route>
 				<Route path="/login" element={<AccessLoginPageHandler />} />
 				{/* <Route

@@ -84,7 +84,7 @@ export default function CreateUserPage() {
 	};
 
 	const handleCancel = () => {
-		navigate("/master/users");
+		navigate("/management/users");
 	};
 
 	const style = {
@@ -127,6 +127,7 @@ export default function CreateUserPage() {
 					handleChange={handleChange}
 					handleSubmit={handleSubmit}
 					isLoading={isLoading}
+					handleCancel={handleCancel}
 				/>
 				<MessageToast
 					toastState={toastState}

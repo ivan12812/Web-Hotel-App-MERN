@@ -2,7 +2,11 @@ import { BASE_URL } from "./Helper";
 
 const getAllUser = async () => {
 	try {
-		const response = await fetch(`${BASE_URL}/user`);
+		const response = await fetch(`${BASE_URL}/user`, {
+			headers: {
+				Authorization: localStorage.getItem("TOKEN"),
+			},
+		});
 		const responseJson = await response.json();
 
 		return responseJson;
@@ -49,7 +53,7 @@ const updateUser = async (id, data) => {
 
 const updateUserStatus = async (id) => {
 	try {
-		const response = await fetch(`${BASE_URL}/user/${id}`, {
+		const response = await fetch(`${BASE_URL}/user/status/${id}`, {
 			method: "PUT",
 			headers: {
 				Authorization: localStorage.getItem("TOKEN"),

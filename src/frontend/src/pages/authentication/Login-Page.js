@@ -63,6 +63,7 @@ export default function LoginPage() {
 
 	const handleAfterSignUp = () => {
 		if (location.state) {
+			console.log(location.state);
 			setToastState(location.state.toastState);
 			window.history.replaceState({}, document.title);
 			setTimeout(() => {
