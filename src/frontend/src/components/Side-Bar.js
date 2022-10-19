@@ -1,46 +1,43 @@
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Accordion from 'react-bootstrap/Accordion';
-import Nav from 'react-bootstrap/Nav';
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { checkToken } from '../api/Authentication';
+import Offcanvas from "react-bootstrap/Offcanvas";
+import Accordion from "react-bootstrap/Accordion";
+import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom";
 
 export default function SideBar(props) {
 	return (
-		<Offcanvas
-			show={props.show}
-			onHide={props.handleClose}
-		>
+		<Offcanvas show={props.show} onHide={props.handleClose}>
 			<Offcanvas.Header>
-				<Offcanvas.Title>Car Rent App</Offcanvas.Title>
+				<Offcanvas.Title>Hotel App</Offcanvas.Title>
 			</Offcanvas.Header>
 			<Offcanvas.Body>
 				<Accordion flush>
-					<Accordion.Item eventKey="0">
-						<Accordion.Header>Master</Accordion.Header>
-						<Accordion.Body>
-							<Nav className="flex-column">
-								<li className="nav-item">
-									<Link
-										className="nav-link"
-										to="master/cars"
-										onClick={props.handleClose}
-									>
-										Cars Master
-									</Link>
-								</li>
-								<li className="nav-item">
-									<Link
-										className="nav-link"
-										to="master/users"
-										onClick={props.handleClose}
-									>
-										Users Master
-									</Link>
-								</li>
-							</Nav>
-						</Accordion.Body>
-					</Accordion.Item>
+					{props.role === "Admin" && (
+						<Accordion.Item eventKey="0">
+							<Accordion.Header>Management</Accordion.Header>
+							<Accordion.Body>
+								<Nav className="flex-column">
+									<li className="nav-item">
+										<Link
+											className="nav-link"
+											to="master/cars"
+											onClick={props.handleClose}
+										>
+											Rooms
+										</Link>
+									</li>
+									<li className="nav-item">
+										<Link
+											className="nav-link"
+											to="master/users"
+											onClick={props.handleClose}
+										>
+											Users
+										</Link>
+									</li>
+								</Nav>
+							</Accordion.Body>
+						</Accordion.Item>
+					)}
 					<Accordion.Item eventKey="1">
 						<Accordion.Header>Transaction</Accordion.Header>
 						<Accordion.Body>
@@ -48,16 +45,25 @@ export default function SideBar(props) {
 								<li className="nav-item">
 									<Link
 										className="nav-link"
-										to="transaction/borrows"
+										to="transaction/checkin"
 										onClick={props.handleClose}
 									>
-										Borrows List
+										Check In
+									</Link>
+								</li>
+								<li className="nav-item">
+									<Link
+										className="nav-link"
+										to="transaction/checkout"
+										onClick={props.handleClose}
+									>
+										Check Out
 									</Link>
 								</li>
 							</Nav>
 						</Accordion.Body>
 					</Accordion.Item>
-					<Accordion.Item eventKey="2">
+					{/* <Accordion.Item eventKey="2">
 						<Accordion.Header>Report</Accordion.Header>
 						<Accordion.Body>
 							<Nav className="flex-column">
@@ -81,7 +87,7 @@ export default function SideBar(props) {
 								</li>
 							</Nav>
 						</Accordion.Body>
-					</Accordion.Item>
+					</Accordion.Item> */}
 				</Accordion>
 			</Offcanvas.Body>
 		</Offcanvas>
