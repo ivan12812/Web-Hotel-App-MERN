@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import UserListTable from "./components/user-management/User-List-Table";
 import CreateUserPage from "./pages/user-management/Create-User-Page";
+import UserListPage from "./pages/user-management/User-List-Page";
 
 // const Protected = () => {
 // 	const [isAuthenticated, setIsAuthenticated] = useState(
@@ -33,12 +35,9 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route
-					path="/master/users/create"
-					element={<CreateUserPage />}
-				/>
-				{/* <Route path="/" element={<Protected />}>
-					<Route path="transaction">
+
+				<Route path="/">
+					{/* <Route path="transaction">
 						<Route path="borrows">
 							<Route index element={<BorrowsListPage />} />
 							<Route
@@ -46,28 +45,28 @@ function App() {
 								element={<CreateBorrowPage />}
 							/>
 						</Route>
-					</Route>
+					</Route> */}
 					<Route path="master">
-						<Route path="cars">
+						{/* <Route path="cars">
 							<Route index element={<CarsListPage />} />
 							<Route path="create" element={<CreateCarPage />} />
 							<Route
 								path="update/:id"
 								element={<UpdateCarPage />}
 							/>
-						</Route>
+						</Route> */}
 						<Route path="users">
 							<Route index element={<UserListPage />} />
 							<Route path="create" element={<CreateUserPage />} />
-							<Route
+							{/* <Route
 								path="update/:id"
 								element={<UpdateUserPage />}
-							/>
+							/> */}
 						</Route>
 					</Route>
 				</Route>
-				<Route path="/login" element={<AccessLoginPageHandler />} />
-				<Route
+				{/* <Route path="/login" element={<AccessLoginPageHandler />} /> */}
+				{/* <Route
 					path="*"
 					element={<Navigate to="/transaction/borrows" />}
 				/> */}
