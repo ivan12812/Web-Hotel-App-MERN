@@ -27,7 +27,7 @@ Team 1:
 Open shell/cmd, then type
 
 ```Shell
-mongorestore -d HotelDBApp <location-of-thisproject>/HotelDBApp
+mongorestore -d HotelDBApp <location-of-thisproject>/HotelAppDB
 ```
 
 #### Run Project
