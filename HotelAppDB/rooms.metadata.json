@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"roomNo":{"$numberInt":"1"}},"name":"roomNo_1","background":true,"unique":true}],"uuid":"4a979ab3a9f24d1e9e51cfd6080bcf17","collectionName":"rooms","type":"collection"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"roomNo":{"$numberInt":"1"}},"name":"roomNo_1","background":true,"unique":true}],"uuid":"5ef4504829c34c288eec49e0f8670c70","collectionName":"rooms","type":"collection"}
