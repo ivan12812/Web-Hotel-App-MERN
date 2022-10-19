@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import NavBar from "./components/Nav-Bar";
 import LoginPage from "./pages/authentication/Login-Page";
+import CreateUserPage from "./pages/user-management/Create-User-Page";
+import UserListPage from "./pages/user-management/User-List-Page";
 
 const Protected = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(
