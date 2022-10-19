@@ -82,57 +82,114 @@ exports.RoomSchema = mongoose.model("Room", {
 	},
 });
 
-// exports.BorrowSchema = mongoose.model("Borrow", {
-// 	unixBookDate: Number, //when they do book //date and time
-// 	customer: {
-// 		name: String,
-// 		ID: String,
-// 		address: String,
-// 		phoneNumber: String,
-// 	},
-// 	carPlateNo: String,
-// 	daysToBorrow: Number,
-// 	hoursToBorrow: Number,
-// 	totalCost: Number,
-// 	downPayment: Number,
-// 	remains: Number,
-// 	status: {
-// 		type: String,
-// 		enum: ["Booked", "On Doing", "Done", "Returned"],
-// 		require: true,
-// 		default: "Booked",
-// 	},
-// 	unixDepartDate: Number, //date and time
-// 	unixReturnDate: Number,
-// 	user: {
-// 		username: String,
-// 		email: String,
-// 	},
-// });
+exports.CheckInSchema = mongoose.model("CheckIn", {
+	checkInDate: {
+		type: Date,
+		required: true,
+		default: Date.now,
+	},
+	roomNo: {
+		type: String,
+		required: true,
+	},
+	customer: {
+		name: {
+			type: String,
+			require: true,
+		},
+		ID: {
+			type: String,
+			require: true,
+		},
+		address: {
+			type: String,
+			require: true,
+		},
+		phoneNumber: {
+			type: String,
+			require: true,
+		},
+	},
+	lengthOfStay: {
+		type: Number,
+		require: true,
+	},
+	dueDate: {
+		type: Date,
+		required: true,
+	},
+	totalCost: {
+		type: Number,
+		required: true,
+	},
+	downPayment: {
+		type: Number,
+		required: true,
+	},
+	remains: {
+		type: Number,
+		required: true,
+	},
+	change: {
+		type: Number,
+		required: true,
+	},
+	status: {
+		type: String,
+		enum: ["Checked In", "Done", "Checked Out"],
+		require: true,
+		default: "Checked In",
+	},
+	paymentStatus: {
+		type: String,
+		enum: ["Paid Off", "Not Yet Paid Off"],
+		require: true,
+		default: "Not Yet Paid Off",
+	},
+	userInCharge: {
+		type: String,
+		require: true,
+	},
+});
 
-// exports.ReturnSchema = mongoose.model("Return", {
-// 	returnDate: { type: Date, default: Date.now },
-// 	borrowId: String,
-// 	lost: {
-// 		isLost: Boolean,
-// 		fine: Number,
-// 		information: String,
-// 	},
-// 	broken: {
-// 		isBroken: Boolean,
-// 		fine: Number,
-// 		information: String,
-// 	},
-// 	late: {
-// 		isLate: Boolean,
-// 		fine: Number,
-// 		information: String,
-// 	},
-// 	totalPrice: Number,
-// 	repayment: Number,
-// 	change: Number,
-// 	user: {
-// 		username: String,
-// 		email: String,
-// 	},
-// });
+exports.CheckOutSchema = mongoose.model("CheckOut", {
+	checkOutDate: {
+		type: Date,
+		required: true,
+		default: Date.now,
+	},
+	checkInId: {
+		type: String,
+		required: true,
+	},
+	late: {
+		isLate: {
+			type: Boolean,
+			required: true,
+		},
+		information: {
+			type: String,
+			required: true,
+		},
+		fine: {
+			type: Number,
+			required: true,
+		},
+	},
+	totalPrice: {
+		type: Number,
+		required: true,
+	},
+	repayment: {
+		type: Number,
+		required: true,
+	},
+	change: {
+		type: Number,
+		required: true,
+	},
+	userInCharge: {
+		type: String,
+		required: String,
+	},
+});
