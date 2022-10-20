@@ -18,7 +18,6 @@ Team 1:
 ### Requirement
 
 1. Node & Node Package Manager
-2. MongoDB Shell & MongoDB Database Tools
 
 ### How to run this project
 
