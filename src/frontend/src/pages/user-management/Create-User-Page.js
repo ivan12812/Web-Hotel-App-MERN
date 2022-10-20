@@ -7,7 +7,7 @@ import MessageToast from "../../components/Message-Toast";
 export default function CreateUserPage() {
 	const [user, setUser] = useState({
 		name: "",
-		role: "receptionist",
+		role: "Receptionist",
 		username: "",
 		password: "",
 	});
@@ -36,7 +36,7 @@ export default function CreateUserPage() {
 		setIsLoading(true);
 		e.preventDefault();
 
-		// console.log(data);
+		console.log(user);
 		const response = await createUser(user);
 
 		setTimeout(() => {
@@ -54,8 +54,8 @@ export default function CreateUserPage() {
 			// 		},
 			// 	});
 			// } else
-			if (response.status.includes("201")) {
-				navigate("/master/users", {
+			if (response.status === 201) {
+				navigate("/management/users", {
 					state: {
 						toastState: {
 							show: true,
@@ -68,7 +68,7 @@ export default function CreateUserPage() {
 				setToastState({
 					...toastState,
 					show: true,
-					title: "Error",
+					title: "Failed",
 					message: response.message,
 				});
 				setTimeout(() => {

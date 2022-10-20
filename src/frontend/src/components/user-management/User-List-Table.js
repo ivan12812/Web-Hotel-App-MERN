@@ -4,6 +4,9 @@ import Loader from "../Loader";
 
 export default function UserListTable(props) {
 	const style = {
+		loader: {
+			color: "#3F72AF",
+		},
 		button: {
 			borderRadius: "15px",
 		},
@@ -38,7 +41,7 @@ export default function UserListTable(props) {
 												{el.status}
 											</Badge>
 										) : (
-											<Badge pill bg="success">
+											<Badge pill bg="secondary">
 												{el.status}
 											</Badge>
 										)}

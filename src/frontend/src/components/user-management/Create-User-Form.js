@@ -66,8 +66,8 @@ export default function CreateUserForm(props) {
 					value={props.user.role}
 					onChange={props.handleChange}
 				>
-					<option value="admin">Admin</option>
-					<option value="receptionist">Receptionist</option>
+					<option value="Admin">Admin</option>
+					<option value="Receptionist">Receptionist</option>
 				</select>
 			</div>
 			<div className="mb-3">

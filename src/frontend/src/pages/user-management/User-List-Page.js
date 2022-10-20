@@ -67,7 +67,7 @@ export default function UserListPage() {
 			setIsLoading(false);
 			setCurrentIndex(null);
 
-			if (response.status === 200) {
+			if (response.status === 201) {
 				setToastState({
 					show: true,
 					title: "Success",
@@ -78,7 +78,7 @@ export default function UserListPage() {
 				setToastState({
 					show: true,
 					title: "Failed",
-					message: response.message,
+					message: response.message + ". " + response.detail || "",
 				});
 			}
 
@@ -91,6 +91,25 @@ export default function UserListPage() {
 			}, 5000);
 		}, 1000);
 	};
+
+	const handleAfterCreateUser = () => {
+		if (location.state) {
+			setToastState(location.state.toastState);
+			window.history.replaceState({}, document.title);
+			setTimeout(() => {
+				setToastState({
+					...toastState,
+					show: false,
+					title: "",
+					message: "",
+				});
+			}, 5000);
+		}
+	};
+
+	useEffect(() => {
+		handleAfterCreateUser();
+	}, []);
 
 	const style = {
 		page: {
@@ -117,7 +136,7 @@ export default function UserListPage() {
 			borderRadius: "20px",
 		},
 		button: {
-			borderRadius: "20px",
+			borderRadius: "15px",
 		},
 	};
 
