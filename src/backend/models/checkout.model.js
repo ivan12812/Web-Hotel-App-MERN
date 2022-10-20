@@ -51,7 +51,7 @@ exports.getAll = (query) => {
 					});
 				}
 			}
-		);
+		).sort({ checkOutDate: "desc" });
 		//.limit(limit ? limit : 10)
 	});
 };
