@@ -8,6 +8,9 @@ import {
 } from "react-router-dom";
 import NavBar from "./components/Nav-Bar";
 import LoginPage from "./pages/authentication/Login-Page";
+import CheckoutListPage from "./pages/checkout/Checkout-List-Page";
+import CreateCheckoutPage from "./pages/checkout/Create-Checkout-Page";
+import RoomListPage from "./pages/room-management/Room-List-Page";
 import CreateUserPage from "./pages/user-management/Create-User-Page";
 import UserListPage from "./pages/user-management/User-List-Page";
 
@@ -39,8 +42,8 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Protected />}>
-					{/* <Route path="transaction">
-						<Route path="borrows">
+					<Route path="transaction">
+						{/* <Route path="borrows">
 							<Route
 								index
 								element={<BorrowsListPage />}
@@ -49,23 +52,27 @@ function App() {
 								path="create"
 								element={<CreateBorrowPage />}
 							/>
-						</Route>
-					</Route> */}
-					<Route path="management">
-						{/* <Route path="cars">
+						</Route> */}
+						<Route path="checkout">
+							<Route index element={<CheckoutListPage />} />
 							<Route
-								index
-								element={<CarsListPage />}
+								path=":id"
+								element={<CreateCheckoutPage />}
 							/>
-							<Route
+						</Route>
+					</Route>
+					<Route path="management">
+						<Route path="rooms">
+							<Route index element={<RoomListPage />} />
+							{/* <Route
 								path="create"
 								element={<CreateCarPage />}
 							/>
 							<Route
 								path="update/:id"
 								element={<UpdateCarPage />}
-							/>
-						</Route> */}
+							/> */}
+						</Route>
 						<Route path="users">
 							<Route index element={<UserListPage />} />
 							<Route path="create" element={<CreateUserPage />} />

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getAllUser, updateUserStatus } from "../../api/Users";
+import { getAllUser, searchUser, updateUserStatus } from "../../api/Users";
 import Loader from "../../components/Loader";
 import MessageToast from "../../components/Message-Toast";
 import UserListTable from "../../components/user-management/User-List-Table";
 import NoData from "../../components/No-Data";
+import SearchBarUser from "../../components/user-management/Search-Bar-User";
 
 export default function UserListPage() {
 	const [users, setUsers] = useState([]);
@@ -18,6 +19,11 @@ export default function UserListPage() {
 		show: false,
 		title: "",
 		message: "",
+	});
+
+	const [search, setSearch] = useState({
+		query: "",
+		category: "username",
 	});
 
 	const navigate = useNavigate();
@@ -111,6 +117,48 @@ export default function UserListPage() {
 		handleAfterCreateUser();
 	}, []);
 
+	const handleChangeSearch = (e) => {
+		const key = e.target.name;
+		const value = e.target.value;
+
+		if (key === "query" && value === "") {
+			getUsers();
+		}
+		setSearch({
+			...search,
+			[key]: value,
+		});
+	};
+
+	const handleSubmitSearch = async (e) => {
+		setIsFetching(true);
+		e.preventDefault();
+
+		const response = await searchUser(search.category, search.query);
+
+		setTimeout(() => {
+			setIsFetching(false);
+			if (response.status === 200) {
+				setUsers(response.data);
+			} else {
+				setToastState({
+					...toastState,
+					show: true,
+					title: "Failed",
+					message: response.message,
+				});
+				setTimeout(() => {
+					setToastState({
+						...toastState,
+						show: false,
+						title: "",
+						message: "",
+					});
+				}, 5000);
+			}
+		}, 1000);
+	};
+
 	const style = {
 		page: {
 			padding: "30px",
@@ -156,6 +204,14 @@ export default function UserListPage() {
 							Create User
 						</button>
 					</div>
+				</div>
+				<div className="mb-3">
+					<SearchBarUser
+						search={search}
+						handleChangeSearch={handleChangeSearch}
+						handleSubmitSearch={handleSubmitSearch}
+						style={style}
+					/>
 				</div>
 				{isFetching ? (
 					<Loader style={style} />
