@@ -16,5 +16,5 @@ app.use(bodyParser.json());
 controllers(app);
 
 app.listen(port, () => {
-	console.log(`Rent Car App API listening on http://localhost:${port}`);
+	console.log(`Hotel App API listening on http://localhost:${port}/api`);
 });
