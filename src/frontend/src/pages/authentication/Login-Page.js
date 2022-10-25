@@ -4,6 +4,7 @@ import { logIn } from "../../api/Authentication";
 import loginillustration from "../../assets/login-illustration.png";
 import { useNavigate } from "react-router-dom";
 import MessageToast from "../../components/Message-Toast";
+import { HeartFill, CCircleFill } from "react-bootstrap-icons";
 
 export default function LoginPage() {
 	const [credential, setCredential] = useState({
@@ -136,7 +137,7 @@ export default function LoginPage() {
 					<h3 className="mb-md-5 mb-sm-3" style={style.title}>
 						Login Hotel App
 					</h3>
-					<form onSubmit={handleLogIn}>
+					<form onSubmit={handleLogIn} className="mb-5">
 						<div className="mb-3">
 							<label
 								htmlFor="username"
@@ -204,6 +205,12 @@ export default function LoginPage() {
 							</div>
 						)}
 					</form>
+					<div className="text-center" style={style.label}>
+						<span>
+							Made with <HeartFill /> by Team 1 Juara Coding{" "}
+							<CCircleFill /> 2022
+						</span>
+					</div>
 				</div>
 			</div>
 			<MessageToast

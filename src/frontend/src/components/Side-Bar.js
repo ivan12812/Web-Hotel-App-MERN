@@ -2,6 +2,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Accordion from "react-bootstrap/Accordion";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
+import { CCircleFill, HeartFill } from "react-bootstrap-icons";
 
 export default function SideBar(props) {
 	return (
@@ -90,6 +91,15 @@ export default function SideBar(props) {
 					</Accordion.Item> */}
 				</Accordion>
 			</Offcanvas.Body>
+			<div
+				className="text-center"
+				style={{ padding: "10px", color: "#3F72AF" }}
+			>
+				<span>
+					Made with <HeartFill /> by Team 1 Juara Coding{" "}
+					<CCircleFill /> 2022
+				</span>
+			</div>
 		</Offcanvas>
 	);
 }

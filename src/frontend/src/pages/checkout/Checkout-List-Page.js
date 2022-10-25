@@ -36,7 +36,7 @@ export default function CheckoutListPage() {
 	const getCheckouts = async () => {
 		setIsFetching(true);
 		const response = await getAllCheckout();
-		console.log(response);
+
 		setTimeout(() => {
 			setIsFetching(false);
 			if (response.status === 200) {
