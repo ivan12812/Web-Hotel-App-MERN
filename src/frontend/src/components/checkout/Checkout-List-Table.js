@@ -16,12 +16,14 @@ export default function CheckoutListTable(props) {
 	return (
 		<div>
 			<table className="table">
-				<thead className="text-center">
+				<thead>
 					<tr>
 						<th scope="col">Checkout Date</th>
 						<th scope="col">Room No</th>
 						<th scope="col">Customer Name</th>
-						<th scope="col">Action</th>
+						<th scope="col" className="text-center">
+							Action
+						</th>
 					</tr>
 				</thead>
 				<tbody>

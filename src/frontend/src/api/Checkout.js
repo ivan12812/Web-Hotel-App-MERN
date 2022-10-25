@@ -15,6 +15,24 @@ const getAllCheckout = async () => {
 	}
 };
 
+const searchCheckout = async (category, value) => {
+	try {
+		const response = await fetch(
+			`${BASE_URL}/checkout?${category}=${value}`,
+			{
+				headers: {
+					Authorization: localStorage.getItem("TOKEN"),
+				},
+			}
+		);
+		const responseJson = await response.json();
+
+		return responseJson;
+	} catch (err) {
+		alert(err);
+	}
+};
+
 const createCheckout = async (data) => {
 	try {
 		const response = await fetch(`${BASE_URL}/checkout`, {
@@ -33,4 +51,4 @@ const createCheckout = async (data) => {
 	}
 };
 
-export { getAllCheckout, createCheckout };
+export { getAllCheckout, searchCheckout, createCheckout };

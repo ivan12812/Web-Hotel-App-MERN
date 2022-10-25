@@ -94,7 +94,7 @@ export default function CheckoutListPage() {
 		const value = e.target.value;
 
 		if (key === "query" && value === "") {
-			getCheckouts();
+			setCheckoutsList(checkouts);
 		}
 
 		setSearch({
@@ -104,30 +104,38 @@ export default function CheckoutListPage() {
 	};
 
 	const handleSubmitSearch = async (e) => {
-		// setIsFetching(true);
-		// e.preventDefault();
-		// const response = await searchUser(search.category, search.query);
-		// setTimeout(() => {
-		// 	setIsFetching(false);
-		// 	if (response.status === 200) {
-		// 		setUsers(response.data);
-		// 	} else {
-		// 		setToastState({
-		// 			...toastState,
-		// 			show: true,
-		// 			title: "Failed",
-		// 			message: response.message,
-		// 		});
-		// 		setTimeout(() => {
-		// 			setToastState({
-		// 				...toastState,
-		// 				show: false,
-		// 				title: "",
-		// 				message: "",
-		// 			});
-		// 		}, 5000);
-		// 	}
-		// }, 1000);
+		setIsFetching(true);
+		e.preventDefault();
+		const response = checkoutsList.filter(function (el) {
+			let result = null;
+			switch (search.category) {
+				case "roomNo":
+					result =
+						el.checkIn.room.roomNo
+							.toLowerCase()
+							.indexOf(search.query.toLocaleLowerCase()) > -1;
+					break;
+				case "customerName":
+					result =
+						el.checkIn.customer.name
+							.toLowerCase()
+							.indexOf(search.query.toLocaleLowerCase()) > -1;
+					break;
+				case "customerId":
+					result =
+						el.checkIn.customer.ID.toLowerCase().indexOf(
+							search.query.toLocaleLowerCase()
+						) > -1;
+					break;
+			}
+
+			return result;
+		});
+
+		setTimeout(() => {
+			setIsFetching(false);
+			setCheckoutsList(response);
+		}, 1000);
 	};
 
 	const style = {
