@@ -5,7 +5,15 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Table from "react-bootstrap/Table";
-import { getAllRooms } from "../../api/Room";
+import { deleteRoom, getAllRooms, searchRoom, updateRoomStatus } from "../../api/Room";
+import SearchBarRoom from "../../components/user-management/Search-Bar-Room";
+import RoomListTable from "../../components/room-management/Room-List-Table";
+import NoData from "../../components/No-Data";
+import Loader from "../../components/Loader";
+
+
+
+
 
 export default function RoomListPage(props) {
 	const [rooms, setRooms] = useState([]);
@@ -22,34 +30,191 @@ export default function RoomListPage(props) {
 		getRooms();
 	}, []);
 
-	return (
-		<div>
-			<Navbar bg="light" expand="lg">
-				<Container fluid>
-					<Navbar.Brand href="#">Rooms Management</Navbar.Brand>
-					<Navbar.Collapse id="navbarScroll">
-						<Nav
-							className="me-auto my-2 my-lg-0"
-							style={{ maxHeight: "100px" }}
-							navbarScroll
-						></Nav>
-					</Navbar.Collapse>
-				</Container>
-			</Navbar>
-			<Container fluid>
-				<Button
-					style={{ marginTop: "10px", marginBottom: "10px" }}
-					variant="outline-primary"
-				>
-					Create Rooms
-				</Button>
-				<Form className="d-flex">
-					<Form.Control
-						type="search"
-						placeholder="Search"
-						className="me-2"
-						aria-label="Search"
+	const [currentIndex, setCurrentIndex] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
+	
+	const handleChangeStatus = async (id, index) => {
+		setIsLoading(true);
+		setCurrentIndex(index);
+		const response = await updateRoomStatus(id);
+
+		setTimeout(() => {
+			setIsLoading(false);
+			setCurrentIndex(null);
+
+			if (response.status === 201) {
+				setToastState({
+					show: true,
+					title: "Success",
+					message: response.message,
+				});
+				getRooms();
+			} else {
+				setToastState({
+					show: true,
+					title: "Failed",
+					message: response.message + ". " + response.detail || "",
+				});
+			}
+
+			setTimeout(() => {
+				setToastState({
+					show: false,
+					title: "",
+					message: "",
+				});
+			}, 5000);
+		}, 1000);
+	};
+
+
+	const [isFetching, setIsFetching] = useState(false);
+
+	const [toastState, setToastState] = useState({
+		show: false,
+		title: "",
+		message: "",
+	});
+
+
+	const [search, setSearch] = useState({
+		query: "",
+		category: "roomNo",
+	});
+
+	
+	const handleChangeSearch = (e) => {
+		const key = e.target.name;
+		const value = e.target.value;
+
+		if (key === "query" && value === "") {
+			getRooms();
+		}
+		setSearch({
+			...search,
+			[key]: value,
+		});
+	};
+	
+
+	const handleSubmitSearch = async (e) => {
+		setIsFetching(true);
+		e.preventDefault();
+
+		const response = await searchRoom(search.category, search.query);
+
+		setTimeout(() => {
+			setIsFetching(false);
+			if (response.status === 200) {
+				setRooms(response.data);
+			} else {
+				setToastState({
+					...toastState,
+					show: true,
+					title: "Failed",
+					message: response.message,
+				});
+				setTimeout(() => {
+					setToastState({
+						...toastState,
+						show: false,
+						title: "",
+						message: "",
+					});
+				}, 5000);
+			}
+		}, 1000);
+	};
+	
+
+	const removeRoom= async (id) => {
+		try {
+			const response = await deleteRoom(id)
+			console.log(response,"kehapus")
+			
+			
+			
+		} catch (error) {
+			console.log(error);
+		}
+
+	}
+
+	const style = {
+		page: {
+			padding: "30px",
+			paddingTop: "70px",
+			backgroundColor: "#F9F7F7",
+		},
+		title: {
+			color: "#112D4E",
+		},
+		label: {
+			color: "#3F72AF",
+		},
+		input: {
+			borderRadius: "10px",
+			borderColor: "#DBE2EF",
+			color: "#3F72AF",
+		},
+	
+		card: {
+			border: "none",
+			borderRadius: "20px",
+		},
+		button: {
+			borderRadius: "15px",
+		},
+	};
+
+
+		
+		return (
+			<div className="min-vh-100" style={style.page}>
+				<div className="container">
+					<div className="row justify-content-between mb-3">
+						<div className="col-auto">
+							<h3 style={style.title}>Room Management</h3>
+						</div>
+						<div className="col-auto">
+							<button
+								className="btn btn-outline-primary shadow"
+								style={style.button}
+								
+							>
+								Create Room
+							</button>
+						</div>
+					</div>
+					<div className="mb-3">
+					<SearchBarRoom
+						search={search}
+						handleChangeSearch={handleChangeSearch}
+						handleSubmitSearch={handleSubmitSearch}
+						style={style}
 					/>
+<<<<<<< HEAD
+					
+					</div>
+					{isFetching ? (
+					<Loader style={style} />
+				) : rooms.length > 0 ? (
+					<RoomListTable
+						rooms={rooms}
+						isLoading={isLoading}
+						currentIndex={currentIndex}
+						handleChangeStatus={handleChangeStatus}
+						removeRoom={removeRoom}
+						getRooms={getRooms}
+						
+					/>
+				) : (
+					<NoData />
+				)}
+					
+				</div>
+			
+=======
 					<Button variant="outline-success">Search</Button>
 				</Form>
 			</Container>
@@ -138,7 +303,9 @@ export default function RoomListPage(props) {
 						<tr></tr> */}
 					</tbody>
 				</Table>
+>>>>>>> d48b1b969a1ae104248b8b5f4effde2c7987482d
 			</div>
-		</div>
-	);
-}
+		);
+	}
+	
+		
