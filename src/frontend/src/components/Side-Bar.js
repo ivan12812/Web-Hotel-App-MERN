@@ -19,7 +19,7 @@ export default function SideBar(props) {
 									<li className="nav-item">
 										<Link
 											className="nav-link"
-											to="master/cars"
+											to="/management/rooms"
 											onClick={props.handleClose}
 										>
 											Rooms
@@ -28,7 +28,7 @@ export default function SideBar(props) {
 									<li className="nav-item">
 										<Link
 											className="nav-link"
-											to="master/users"
+											to="/management/users"
 											onClick={props.handleClose}
 										>
 											Users
