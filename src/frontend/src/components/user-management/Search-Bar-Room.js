@@ -1,4 +1,4 @@
-export default function SearchBarCheckout(props) {
+export default function SearchBarRoom(props) {
 	return (
 		<form onSubmit={props.handleSubmitSearch}>
 			<div className="row justify-content-center align-items-center">
@@ -11,9 +11,8 @@ export default function SearchBarCheckout(props) {
 						onChange={props.handleChangeSearch}
 						style={props.style.input}
 					>
-						<option value="roomNo">Room No</option>
-						<option value="customerName">Customer Name</option>
-						<option value="customerId">Customer ID</option>
+						<option value="roomNo">Room Number</option>
+						<option value="status">Status</option>
 					</select>
 				</div>
 				<div className="col-6">
@@ -24,7 +23,7 @@ export default function SearchBarCheckout(props) {
 						name="query"
 						value={props.search.query}
 						onChange={props.handleChangeSearch}
-						placeholder={`Search checkout`}
+						placeholder={`Search room by ${props.search.category}`}
 						style={props.style.input}
 					/>
 				</div>
