@@ -13,7 +13,7 @@ export default function SearchBarCheckout(props) {
 					>
 						<option value="roomNo">Room No</option>
 						<option value="customerName">Customer Name</option>
-						<option value="customerID">Customer ID</option>
+						<option value="customerId">Customer ID</option>
 					</select>
 				</div>
 				<div className="col-6">
@@ -24,7 +24,7 @@ export default function SearchBarCheckout(props) {
 						name="query"
 						value={props.search.query}
 						onChange={props.handleChangeSearch}
-						placeholder={`Search checkout by ${props.search.category}`}
+						placeholder={`Search checkout`}
 						style={props.style.input}
 					/>
 				</div>

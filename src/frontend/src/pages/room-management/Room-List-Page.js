@@ -74,7 +74,6 @@ export default function RoomListPage(props) {
 										<td>{el.price}</td>
 										<td>{el.status}</td>
 										<td>
-											{" "}
 											<Button
 												variant="primary"
 												size="sm"
