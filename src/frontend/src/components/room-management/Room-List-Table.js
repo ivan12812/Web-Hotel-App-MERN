@@ -1,12 +1,10 @@
 import { Trash, Pencil } from "react-bootstrap-icons";
 import { Badge } from "react-bootstrap";
 import Loader from "../Loader";
-import { useEffect } from "react";
-
+import { idrFormat } from "../../utils/Formatter";
 
 export default function RoomListTable(props) {
 	const style = {
-
 		loader: {
 			color: "#3F72AF",
 		},
@@ -18,14 +16,12 @@ export default function RoomListTable(props) {
 		},
 	};
 
-    useEffect(()=>{props.getRooms()},[props.rooms])
-
 	return (
 		<div>
 			<table className="table">
 				<thead className="text-center">
 					<tr>
-						<th scope="col">No</th>
+						<th scope="col">Room No</th>
 						<th scope="col">Type</th>
 						<th scope="col">Price</th>
 						<th scope="col">Status</th>
@@ -37,10 +33,20 @@ export default function RoomListTable(props) {
 						props.rooms.map((el, index) => {
 							return (
 								<tr key={index}>
-							<td scope="row">{el.roomNo}</td>
-										<td >{el.type}</td>
-										<td>{el.price}</td>
-                                        <td>{el.status}</td>
+									<td scope="row">{el.roomNo}</td>
+									<td>{el.type}</td>
+									<td>{idrFormat(el.price)}</td>
+									<td>
+										{el.status === "Available" ? (
+											<Badge pill bg="success">
+												{el.status}
+											</Badge>
+										) : (
+											<Badge pill bg="secondary">
+												{el.status}
+											</Badge>
+										)}
+									</td>
 									<td>
 										{props.isLoading &&
 										props.currentIndex === index ? (
@@ -73,8 +79,12 @@ export default function RoomListTable(props) {
 													<button
 														className="btn btn-outline-danger"
 														style={style.iconButton}
-                                                        onClick={()=> props.removeRoom(el._id)}
-                                                        
+														onClick={() =>
+															props.handleDeleteRoom(
+																el._id,
+																index
+															)
+														}
 													>
 														<Trash size={16} />
 													</button>
