@@ -12,7 +12,7 @@ export default function NavBar() {
 
 	const auth = async () => {
 		const response = await checkToken();
-		console.log(response);
+
 		if (response.status === 200) {
 			setUserLoggedIn(response.data);
 		} else {
@@ -21,8 +21,8 @@ export default function NavBar() {
 				state: {
 					toastState: {
 						show: true,
-						title: response.message,
-						message: response.detail,
+						title: "Session has expired",
+						message: response.message,
 					},
 				},
 			});

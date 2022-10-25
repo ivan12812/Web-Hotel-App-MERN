@@ -18,17 +18,8 @@ Team 1:
 ### Requirement
 
 1. Node & Node Package Manager
-2. MongoDB Shell & MongoDB Database Tools
 
-### How to run
-
-#### Import DB to your local MongoDB
-
-Open shell/cmd, then type
-
-```Shell
-mongorestore -d HotelDBApp <location-of-thisproject>/HotelAppDB
-```
+### How to run this project
 
 #### Run Project
 

@@ -2,7 +2,26 @@ import { BASE_URL } from "./Helper";
 
 const getAllUser = async () => {
 	try {
-		const response = await fetch(`${BASE_URL}/user`);
+		const response = await fetch(`${BASE_URL}/user`, {
+			headers: {
+				Authorization: localStorage.getItem("TOKEN"),
+			},
+		});
+		const responseJson = await response.json();
+
+		return responseJson;
+	} catch (err) {
+		alert(err);
+	}
+};
+
+const searchUser = async (category, value) => {
+	try {
+		const response = await fetch(`${BASE_URL}/user?${category}=${value}`, {
+			headers: {
+				Authorization: localStorage.getItem("TOKEN"),
+			},
+		});
 		const responseJson = await response.json();
 
 		return responseJson;
@@ -49,7 +68,7 @@ const updateUser = async (id, data) => {
 
 const updateUserStatus = async (id) => {
 	try {
-		const response = await fetch(`${BASE_URL}/user/${id}`, {
+		const response = await fetch(`${BASE_URL}/user/status/${id}`, {
 			method: "PUT",
 			headers: {
 				Authorization: localStorage.getItem("TOKEN"),
@@ -79,4 +98,11 @@ const deleteUser = async (id) => {
 	}
 };
 
-export { getAllUser, createUser, updateUser, updateUserStatus, deleteUser };
+export {
+	getAllUser,
+	searchUser,
+	createUser,
+	updateUser,
+	updateUserStatus,
+	deleteUser,
+};
