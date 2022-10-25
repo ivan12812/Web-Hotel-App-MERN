@@ -10,6 +10,8 @@ import NavBar from "./components/Nav-Bar";
 import LoginPage from "./pages/authentication/Login-Page";
 import CreateUserPage from "./pages/user-management/Create-User-Page";
 import UserListPage from "./pages/user-management/User-List-Page";
+import SearchBar from "./components/user-management/Search-Bar";
+import UpdateUserPage from "./pages/user-management/Update-User-Page";
 
 const Protected = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(
@@ -88,6 +90,8 @@ function App() {
 					element={<Navigate to="/transaction/borrows" />}
 				/> */}
 			</Routes>
+			<SearchBar/>
+			<UpdateUserPage/>
 		</BrowserRouter>
 	);
 }
