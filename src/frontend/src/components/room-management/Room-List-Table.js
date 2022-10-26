@@ -1,4 +1,4 @@
-import { Trash, Pencil } from "react-bootstrap-icons";
+import { Trash, Pencil, Eye } from "react-bootstrap-icons";
 import { Badge } from "react-bootstrap";
 import Loader from "../Loader";
 import { idrFormat } from "../../utils/Formatter";
@@ -53,6 +53,14 @@ export default function RoomListTable(props) {
 											<Loader style={style} />
 										) : (
 											<div className="row justify-content-center">
+												<div className="col-auto">
+													<button
+														className="btn btn-outline-info"
+														style={style.iconButton}
+													>
+														<Eye size={16} />
+													</button>
+												</div>
 												<div className="col-auto">
 													<button
 														className="btn btn-outline-warning"

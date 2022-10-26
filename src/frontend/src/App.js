@@ -14,6 +14,7 @@ import RoomListPage from "./pages/room-management/Room-List-Page";
 import CreateUserPage from "./pages/user-management/Create-User-Page";
 import UserListPage from "./pages/user-management/User-List-Page";
 import UpdateUserPage from "./pages/user-management/Update-User-Page";
+import CreateRoomPage from "./pages/room-management/Create-Room-Page";
 
 const Protected = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(
@@ -65,11 +66,8 @@ function App() {
 					<Route path="management">
 						<Route path="rooms">
 							<Route index element={<RoomListPage />} />
-							{/* <Route
-								path="create"
-								element={<CreateCarPage />}
-							/>
-							<Route
+							<Route path="create" element={<CreateRoomPage />} />
+							{/*<Route
 								path="update/:id"
 								element={<UpdateCarPage />}
 							/> */}

@@ -11,6 +11,7 @@ import NoData from "../../components/No-Data";
 import Loader from "../../components/Loader";
 import DeleteRoomModal from "../../components/room-management/Delete-Room-Modal";
 import MessageToast from "../../components/Message-Toast";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function RoomListPage() {
 	const [rooms, setRooms] = useState([]);
@@ -33,6 +34,9 @@ export default function RoomListPage() {
 	});
 
 	const [deleteRoomModalState, setDeleteRoomModalState] = useState(false);
+
+	const navigate = useNavigate();
+	const location = useLocation();
 
 	const getRooms = async () => {
 		setIsFetching(true);
@@ -170,6 +174,29 @@ export default function RoomListPage() {
 		}, 5000);
 	};
 
+	const handleClickCreate = () => {
+		navigate("/management/rooms/create");
+	};
+
+	const handleAfterCreateRoom = () => {
+		if (location.state) {
+			setToastState(location.state.toastState);
+			window.history.replaceState({}, document.title);
+			setTimeout(() => {
+				setToastState({
+					...toastState,
+					show: false,
+					title: "",
+					message: "",
+				});
+			}, 5000);
+		}
+	};
+
+	useEffect(() => {
+		handleAfterCreateRoom();
+	}, []);
+
 	const style = {
 		page: {
 			padding: "30px",
@@ -210,6 +237,7 @@ export default function RoomListPage() {
 						<button
 							className="btn btn-outline-primary shadow"
 							style={style.button}
+							onClick={() => handleClickCreate()}
 						>
 							Create Room
 						</button>
