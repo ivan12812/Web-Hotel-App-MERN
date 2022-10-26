@@ -204,6 +204,10 @@ export default function RoomListPage() {
 		setDetailRoomModalState(true);
 	};
 
+	const handleClickUpdate = (id) => {
+		navigate(`/management/rooms/update/${id}`);
+	};
+
 	const style = {
 		page: {
 			padding: "30px",
@@ -268,6 +272,7 @@ export default function RoomListPage() {
 						handleChangeStatus={handleChangeStatus}
 						handleClickDelete={handleClickDelete}
 						handleClickDetail={handleClickDetail}
+						handleClickUpdate={handleClickUpdate}
 					/>
 				) : (
 					<NoData />

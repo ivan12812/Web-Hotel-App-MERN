@@ -84,6 +84,11 @@ export default function RoomListTable(props) {
 													<button
 														className="btn btn-outline-warning"
 														style={style.iconButton}
+														onClick={() =>
+															props.handleClickUpdate(
+																el._id
+															)
+														}
 													>
 														<Pencil size={16} />
 													</button>

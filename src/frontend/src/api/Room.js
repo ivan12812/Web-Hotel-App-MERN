@@ -45,6 +45,21 @@ const searchRoom = async (category, value) => {
 	}
 };
 
+const getRoomById = async (id) => {
+	try {
+		const response = await fetch(`${BASE_URL}/room/${id}`, {
+			headers: {
+				Authorization: localStorage.getItem("TOKEN"),
+			},
+		});
+		const responseJson = await response.json();
+
+		return responseJson;
+	} catch (err) {
+		alert(err);
+	}
+};
+
 const createRoom = async (data) => {
 	try {
 		const formData = new FormData();
@@ -132,6 +147,7 @@ export {
 	getAllRooms,
 	getAvailableRooms,
 	searchRoom,
+	getRoomById,
 	createRoom,
 	updateRoom,
 	updateRoomStatus,

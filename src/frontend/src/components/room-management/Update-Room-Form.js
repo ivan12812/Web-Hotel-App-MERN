@@ -1,6 +1,6 @@
 import Loader from "../../components/Loader";
 
-export default function CreateRoomForm(props) {
+export default function UpdateRoomForm(props) {
 	const style = {
 		page: {
 			padding: "30px",
@@ -120,6 +120,25 @@ export default function CreateRoomForm(props) {
 				</label>
 				<div className="row">
 					<div className="col">
+						<div className="mb-3 form-check form-switch">
+							<input
+								className="form-check-input"
+								type="checkbox"
+								role="switch"
+								id="isEditPicture"
+								name="isEditPicture"
+								value={props.room.isEditPicture}
+								onChange={props.handleChange}
+								style={style.input}
+							/>
+							<label
+								className="form-check-label"
+								htmlFor="isEditPicture"
+								style={style.label}
+							>
+								Edit Room Picture
+							</label>
+						</div>
 						<input
 							type="file"
 							className="form-control"
@@ -128,6 +147,7 @@ export default function CreateRoomForm(props) {
 							onChange={props.handleChange}
 							style={style.input}
 							accept="image/*"
+							disabled={!props.room.isEditPicture}
 						/>
 					</div>
 					<div className="col">
@@ -139,12 +159,20 @@ export default function CreateRoomForm(props) {
 								>
 									Picture Preview
 								</h6>
-								{props.picPreview && (
+								{!props.room.isEditPicture ? (
 									<img
-										src={props.picPreview}
+										src={`data:image/png;base64,${props.room.base64String}`}
 										width={500}
-										alt="room-preview"
+										alt="room"
 									/>
+								) : (
+									props.picPreview && (
+										<img
+											src={props.picPreview}
+											width={500}
+											alt="room"
+										/>
+									)
 								)}
 							</div>
 						</div>
@@ -178,10 +206,11 @@ export default function CreateRoomForm(props) {
 									props.room.type === "" ||
 									props.room.facility === "" ||
 									props.room.price === "" ||
-									props.room.picture === undefined
+									(props.room.isEditPicture &&
+										props.room.picture === undefined)
 								}
 							>
-								Create
+								Update
 							</button>
 						</div>
 					</div>
