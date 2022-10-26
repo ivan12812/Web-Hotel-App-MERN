@@ -57,6 +57,11 @@ export default function RoomListTable(props) {
 													<button
 														className="btn btn-outline-info"
 														style={style.iconButton}
+														onClick={() =>
+															props.handleClickDetail(
+																el
+															)
+														}
 													>
 														<Eye size={16} />
 													</button>

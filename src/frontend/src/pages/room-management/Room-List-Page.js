@@ -12,6 +12,7 @@ import Loader from "../../components/Loader";
 import DeleteRoomModal from "../../components/room-management/Delete-Room-Modal";
 import MessageToast from "../../components/Message-Toast";
 import { useNavigate, useLocation } from "react-router-dom";
+import DetailRoomModal from "../../components/room-management/Detail-Room-Modal";
 
 export default function RoomListPage() {
 	const [rooms, setRooms] = useState([]);
@@ -34,6 +35,7 @@ export default function RoomListPage() {
 	});
 
 	const [deleteRoomModalState, setDeleteRoomModalState] = useState(false);
+	const [detailRoomModalState, setDetailRoomModalState] = useState(false);
 
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -197,6 +199,11 @@ export default function RoomListPage() {
 		handleAfterCreateRoom();
 	}, []);
 
+	const handleClickDetail = (room) => {
+		setRoom(room);
+		setDetailRoomModalState(true);
+	};
+
 	const style = {
 		page: {
 			padding: "30px",
@@ -260,6 +267,7 @@ export default function RoomListPage() {
 						currentIndex={currentIndex}
 						handleChangeStatus={handleChangeStatus}
 						handleClickDelete={handleClickDelete}
+						handleClickDetail={handleClickDetail}
 					/>
 				) : (
 					<NoData />
@@ -276,6 +284,13 @@ export default function RoomListPage() {
 					room={room}
 					handleDeleteRoom={handleDeleteRoom}
 					style={style}
+				/>
+			)}
+			{detailRoomModalState && (
+				<DetailRoomModal
+					detailRoomModalState={detailRoomModalState}
+					setDetailRoomModalState={setDetailRoomModalState}
+					room={room}
 				/>
 			)}
 		</div>

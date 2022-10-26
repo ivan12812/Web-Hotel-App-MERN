@@ -171,7 +171,7 @@ export default function DetailCheckoutModal(props) {
 					<div className="mb-3 text-center">
 						<img
 							src={`data:image/png;base64,${base64String}`}
-							width={300}
+							width={400}
 							alt="room picture"
 						/>
 					</div>
@@ -193,7 +193,9 @@ export default function DetailCheckoutModal(props) {
 							</div>
 							<div className="mb-3">
 								<h6>Facility</h6>
-								<p>{props.room.facility}</p>
+								<span style={{ whiteSpace: "pre-line" }}>
+									{props.room.facility}
+								</span>
 							</div>
 						</div>
 					</div>
