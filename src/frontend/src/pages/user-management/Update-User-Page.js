@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createUser, updateUser, getUserById } from "../../api/Users";
+import { updateUser, getUserById } from "../../api/Users";
 import Loader from "../../components/Loader";
 import MessageToast from "../../components/Message-Toast";
 import UpdateUserForm from "../../components/user-management/Update-User-Form";
@@ -30,30 +30,28 @@ export default function UpdateUserPage() {
 		setIsFetching(true);
 
 		const response = await getUserById(id);
-		console.log(response);
-		setTimeout(() => {
-			setIsFetching(false);
-			if (response.status === 200) {
-				setUser({
-					...user,
-					...response.data,
-				});
-			} else {
-				setToastState({
-					show: true,
-					title: "Failed",
-					message: response.message,
-				});
 
-				setTimeout(() => {
-					setToastState({
-						show: false,
-						title: "",
-						message: "",
-					});
-				}, 5000);
-			}
-		}, 1000);
+		setIsFetching(false);
+		if (response.status === 200) {
+			setUser({
+				...user,
+				...response.data,
+			});
+		} else {
+			setToastState({
+				show: true,
+				title: "Failed",
+				message: response.message,
+			});
+
+			setTimeout(() => {
+				setToastState({
+					show: false,
+					title: "",
+					message: "",
+				});
+			}, 5000);
+		}
 	};
 
 	useEffect(() => {
@@ -88,48 +86,46 @@ export default function UpdateUserPage() {
 
 		const response = await updateUser(id, payload);
 
-		setTimeout(() => {
-			setIsLoading(false);
+		setIsLoading(false);
 
-			// if (response.status.includes('401')) {
-			// 	localStorage.removeItem('TOKEN');
-			// 	navigate('/login', {
-			// 		state: {
-			// 			toastState: {
-			// 				show: true,
-			// 				title: 'Session Expired',
-			// 				message: 'Your session has expired, please login',
-			// 			},
-			// 		},
-			// 	});
-			// } else
-			if (response.status === 201) {
-				navigate("/management/users", {
-					state: {
-						toastState: {
-							show: true,
-							title: "Success",
-							message: response.message,
-						},
+		// if (response.status.includes('401')) {
+		// 	localStorage.removeItem('TOKEN');
+		// 	navigate('/login', {
+		// 		state: {
+		// 			toastState: {
+		// 				show: true,
+		// 				title: 'Session Expired',
+		// 				message: 'Your session has expired, please login',
+		// 			},
+		// 		},
+		// 	});
+		// } else
+		if (response.status === 201) {
+			navigate("/management/users", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Success",
+						message: response.message,
 					},
-				});
-			} else {
+				},
+			});
+		} else {
+			setToastState({
+				...toastState,
+				show: true,
+				title: "Failed",
+				message: response.message,
+			});
+			setTimeout(() => {
 				setToastState({
 					...toastState,
-					show: true,
-					title: "Failed",
-					message: response.message,
+					show: false,
+					title: "",
+					message: "",
 				});
-				setTimeout(() => {
-					setToastState({
-						...toastState,
-						show: false,
-						title: "",
-						message: "",
-					});
-				}, 5000);
-			}
-		}, 1000);
+			}, 5000);
+		}
 	};
 
 	const handleCancel = () => {

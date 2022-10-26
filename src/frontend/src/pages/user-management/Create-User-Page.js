@@ -39,48 +39,46 @@ export default function CreateUserPage() {
 		console.log(user);
 		const response = await createUser(user);
 
-		setTimeout(() => {
-			setIsLoading(false);
+		setIsLoading(false);
 
-			// if (response.status.includes('401')) {
-			// 	localStorage.removeItem('TOKEN');
-			// 	navigate('/login', {
-			// 		state: {
-			// 			toastState: {
-			// 				show: true,
-			// 				title: 'Session Expired',
-			// 				message: 'Your session has expired, please login',
-			// 			},
-			// 		},
-			// 	});
-			// } else
-			if (response.status === 201) {
-				navigate("/management/users", {
-					state: {
-						toastState: {
-							show: true,
-							title: "Success",
-							message: response.message,
-						},
+		// if (response.status.includes('401')) {
+		// 	localStorage.removeItem('TOKEN');
+		// 	navigate('/login', {
+		// 		state: {
+		// 			toastState: {
+		// 				show: true,
+		// 				title: 'Session Expired',
+		// 				message: 'Your session has expired, please login',
+		// 			},
+		// 		},
+		// 	});
+		// } else
+		if (response.status === 201) {
+			navigate("/management/users", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Success",
+						message: response.message,
 					},
-				});
-			} else {
+				},
+			});
+		} else {
+			setToastState({
+				...toastState,
+				show: true,
+				title: "Failed",
+				message: response.message,
+			});
+			setTimeout(() => {
 				setToastState({
 					...toastState,
-					show: true,
-					title: "Failed",
-					message: response.message,
+					show: false,
+					title: "",
+					message: "",
 				});
-				setTimeout(() => {
-					setToastState({
-						...toastState,
-						show: false,
-						title: "",
-						message: "",
-					});
-				}, 5000);
-			}
-		}, 1000);
+			}, 5000);
+		}
 	};
 
 	const handleCancel = () => {

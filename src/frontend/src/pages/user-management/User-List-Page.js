@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getAllUser, searchUser, updateUserStatus } from "../../api/Users";
+import {
+	deleteUser,
+	getAllUser,
+	searchUser,
+	updateUserStatus,
+} from "../../api/Users";
 import Loader from "../../components/Loader";
 import MessageToast from "../../components/Message-Toast";
 import UserListTable from "../../components/user-management/User-List-Table";
 import NoData from "../../components/No-Data";
 import SearchBarUser from "../../components/user-management/Search-Bar-User";
+import DeleteUserModal from "../../components/user-management/Delete-User-Modal";
 
 export default function UserListPage() {
 	const [users, setUsers] = useState([]);
@@ -14,6 +20,8 @@ export default function UserListPage() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const [currentIndex, setCurrentIndex] = useState(null);
+
+	const [user, setUser] = useState({});
 
 	const [toastState, setToastState] = useState({
 		show: false,
@@ -26,6 +34,8 @@ export default function UserListPage() {
 		category: "username",
 	});
 
+	const [deleteUserModalState, setDeleteUserModalState] = useState(false);
+
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -33,27 +43,25 @@ export default function UserListPage() {
 		setIsFetching(true);
 		const response = await getAllUser();
 
-		setTimeout(() => {
-			setIsFetching(false);
-			if (response.status === 200) {
-				setUsers(response.data);
-			} else {
+		setIsFetching(false);
+		if (response.status === 200) {
+			setUsers(response.data);
+		} else {
+			setToastState({
+				...toastState,
+				show: true,
+				title: "Failed",
+				message: response.message,
+			});
+			setTimeout(() => {
 				setToastState({
 					...toastState,
-					show: true,
-					title: "Failed",
-					message: response.message,
+					show: false,
+					title: "",
+					message: "",
 				});
-				setTimeout(() => {
-					setToastState({
-						...toastState,
-						show: false,
-						title: "",
-						message: "",
-					});
-				}, 5000);
-			}
-		}, 1000);
+			}, 5000);
+		}
 	};
 
 	useEffect(() => {
@@ -69,33 +77,31 @@ export default function UserListPage() {
 		setCurrentIndex(index);
 		const response = await updateUserStatus(id);
 
+		setIsLoading(false);
+		setCurrentIndex(null);
+
+		if (response.status === 201) {
+			setToastState({
+				show: true,
+				title: "Success",
+				message: response.message,
+			});
+			getUsers();
+		} else {
+			setToastState({
+				show: true,
+				title: "Failed",
+				message: response.message + ". " + response.detail || "",
+			});
+		}
+
 		setTimeout(() => {
-			setIsLoading(false);
-			setCurrentIndex(null);
-
-			if (response.status === 201) {
-				setToastState({
-					show: true,
-					title: "Success",
-					message: response.message,
-				});
-				getUsers();
-			} else {
-				setToastState({
-					show: true,
-					title: "Failed",
-					message: response.message + ". " + response.detail || "",
-				});
-			}
-
-			setTimeout(() => {
-				setToastState({
-					show: false,
-					title: "",
-					message: "",
-				});
-			}, 5000);
-		}, 1000);
+			setToastState({
+				show: false,
+				title: "",
+				message: "",
+			});
+		}, 5000);
 	};
 
 	const handleUpdateUser = (id) => {
@@ -140,27 +146,61 @@ export default function UserListPage() {
 
 		const response = await searchUser(search.category, search.query);
 
-		setTimeout(() => {
-			setIsFetching(false);
-			if (response.status === 200) {
-				setUsers(response.data);
-			} else {
+		setIsFetching(false);
+		if (response.status === 200) {
+			setUsers(response.data);
+		} else {
+			setToastState({
+				...toastState,
+				show: true,
+				title: "Failed",
+				message: response.message,
+			});
+			setTimeout(() => {
 				setToastState({
 					...toastState,
-					show: true,
-					title: "Failed",
-					message: response.message,
+					show: false,
+					title: "",
+					message: "",
 				});
-				setTimeout(() => {
-					setToastState({
-						...toastState,
-						show: false,
-						title: "",
-						message: "",
-					});
-				}, 5000);
-			}
-		}, 1000);
+			}, 5000);
+		}
+	};
+
+	const handleClickDelete = (user, index) => {
+		setUser(user);
+		setCurrentIndex(index);
+
+		setDeleteUserModalState(true);
+	};
+
+	const handleDeleteUser = async (id) => {
+		setIsLoading(true);
+		const response = await deleteUser(id);
+
+		setIsLoading(false);
+		if (response.status === 204) {
+			setToastState({
+				show: true,
+				title: "Success",
+				message: response.message,
+			});
+			getUsers();
+		} else {
+			setToastState({
+				show: true,
+				title: "Failed",
+				message: response.message,
+			});
+		}
+
+		setTimeout(() => {
+			setToastState({
+				show: false,
+				title: "",
+				message: "",
+			});
+		}, 5000);
 	};
 
 	const style = {
@@ -226,6 +266,7 @@ export default function UserListPage() {
 						currentIndex={currentIndex}
 						handleChangeStatus={handleChangeStatus}
 						handleUpdateUser={handleUpdateUser}
+						handleClickDelete={handleClickDelete}
 					/>
 				) : (
 					<NoData />
@@ -235,6 +276,15 @@ export default function UserListPage() {
 				toastState={toastState}
 				setToastState={setToastState}
 			/>
+			{deleteUserModalState && (
+				<DeleteUserModal
+					deleteUserModalState={deleteUserModalState}
+					setDeleteUserModalState={setDeleteUserModalState}
+					user={user}
+					handleDeleteUser={handleDeleteUser}
+					style={style}
+				/>
+			)}
 		</div>
 	);
 }

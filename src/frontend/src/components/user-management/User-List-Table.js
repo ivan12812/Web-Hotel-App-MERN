@@ -83,6 +83,12 @@ export default function UserListTable(props) {
 													<button
 														className="btn btn-outline-danger"
 														style={style.iconButton}
+														onClick={() =>
+															props.handleClickDelete(
+																el,
+																index
+															)
+														}
 													>
 														<Trash size={16} />
 													</button>
