@@ -28,7 +28,7 @@ exports.getAll = (query) => {
 					resolve(result);
 				}
 			}
-		);
+		).sort({ roomNo: "asc" });
 		//.limit(limit ? limit : 10)
 	});
 };

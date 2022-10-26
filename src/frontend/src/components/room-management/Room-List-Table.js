@@ -80,8 +80,8 @@ export default function RoomListTable(props) {
 														className="btn btn-outline-danger"
 														style={style.iconButton}
 														onClick={() =>
-															props.handleDeleteRoom(
-																el._id,
+															props.handleClickDelete(
+																el,
 																index
 															)
 														}

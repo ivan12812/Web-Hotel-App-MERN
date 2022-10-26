@@ -5,15 +5,18 @@ import {
 	searchRoom,
 	updateRoomStatus,
 } from "../../api/Room";
-import SearchBarRoom from "../../components/user-management/Search-Bar-Room";
+import SearchBarRoom from "../../components/room-management/Search-Bar-Room";
 import RoomListTable from "../../components/room-management/Room-List-Table";
 import NoData from "../../components/No-Data";
 import Loader from "../../components/Loader";
+import DeleteRoomModal from "../../components/room-management/Delete-Room-Modal";
+import MessageToast from "../../components/Message-Toast";
 
 export default function RoomListPage() {
 	const [rooms, setRooms] = useState([]);
 
 	const [currentIndex, setCurrentIndex] = useState(null);
+	const [room, setRoom] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 
 	const [isFetching, setIsFetching] = useState(false);
@@ -28,6 +31,8 @@ export default function RoomListPage() {
 		query: "",
 		category: "roomNo",
 	});
+
+	const [deleteRoomModalState, setDeleteRoomModalState] = useState(false);
 
 	const getRooms = async () => {
 		setIsFetching(true);
@@ -129,13 +134,17 @@ export default function RoomListPage() {
 		}
 	};
 
-	const handleDeleteRoom = async (id, index) => {
-		setIsLoading(true);
+	const handleClickDelete = (room, index) => {
+		setRoom(room);
+		setDeleteRoomModalState(true);
 		setCurrentIndex(index);
+	};
+
+	const handleDeleteRoom = async (id) => {
+		setIsLoading(true);
 		const response = await deleteRoom(id);
 
 		setIsLoading(false);
-		setCurrentIndex(null);
 
 		if (response.status === 204) {
 			setToastState({
@@ -222,12 +231,25 @@ export default function RoomListPage() {
 						isLoading={isLoading}
 						currentIndex={currentIndex}
 						handleChangeStatus={handleChangeStatus}
-						handleDeleteRoom={handleDeleteRoom}
+						handleClickDelete={handleClickDelete}
 					/>
 				) : (
 					<NoData />
 				)}
 			</div>
+			<MessageToast
+				toastState={toastState}
+				setToastState={setToastState}
+			/>
+			{deleteRoomModalState && (
+				<DeleteRoomModal
+					deleteRoomModalState={deleteRoomModalState}
+					setDeleteRoomModalState={setDeleteRoomModalState}
+					room={room}
+					handleDeleteRoom={handleDeleteRoom}
+					style={style}
+				/>
+			)}
 		</div>
 	);
 }

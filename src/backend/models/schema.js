@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 mongoose
-	// .connect(
-	// 	"mongodb+srv://admin:admin@cluster0.y4tjtbx.mongodb.net/HotelDBApp?retryWrites=true&w=majority"
-	// )
-	.connect("mongodb://localhost:27017/HotelAppDB")
+	.connect(
+		"mongodb+srv://admin:admin@cluster0.y4tjtbx.mongodb.net/HotelDBApp?retryWrites=true&w=majority"
+	)
+	// .connect("mongodb://localhost:27017/HotelAppDB")
 	.then(() => {
 		console.log("MongoDB connection has been established successfully.");
 	})

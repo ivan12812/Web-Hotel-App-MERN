@@ -36,29 +36,28 @@ export default function CheckoutListPage() {
 	const getCheckouts = async () => {
 		setIsFetching(true);
 		const response = await getAllCheckout();
+		const data = await response.data;
 
-		setTimeout(() => {
-			setIsFetching(false);
-			if (response.status === 200) {
-				setCheckouts(response.data);
-				setCheckoutsList(response.data);
-			} else {
+		setIsFetching(false);
+		if (response.status === 200) {
+			setCheckouts(data);
+			setCheckoutsList(data);
+		} else {
+			setToastState({
+				...toastState,
+				show: true,
+				title: "Failed",
+				message: response.message,
+			});
+			setTimeout(() => {
 				setToastState({
 					...toastState,
-					show: true,
-					title: "Failed",
-					message: response.message,
+					show: false,
+					title: "",
+					message: "",
 				});
-				setTimeout(() => {
-					setToastState({
-						...toastState,
-						show: false,
-						title: "",
-						message: "",
-					});
-				}, 5000);
-			}
-		}, 1000);
+			}, 5000);
+		}
 	};
 
 	useEffect(() => {
