@@ -38,44 +38,51 @@ export default function CreateCheckoutPage() {
 	const { id } = useParams();
 
 	const getCheckIn = async () => {
-		console.log(!checkOut);
 		setIsFetching(true);
-		console.log(id);
 		const response = await getCheckinById(id);
-		console.log(response);
-		setTimeout(() => {
-			setIsFetching(false);
 
-			if (response.status === 200) {
-				setCheckIn(response.data);
-				setRoom(response.data.room);
-				setCustomer(response.data.customer);
-				setCheckOut({
-					...checkOut,
-					totalPrice: response.data.totalCost,
-					remains: response.data.remains,
-				});
-				setBase64String(
-					btoa(
-						new Uint8Array(
-							response.data.room.picture.data.data
-						).reduce(function (data, byte) {
-							return data + String.fromCharCode(byte);
-						}, "")
-					)
-				);
-			} else {
-				navigate("/transaction/checkin", {
-					state: {
-						toastState: {
-							show: true,
-							title: "Failed",
-							message: response.message,
-						},
+		setIsFetching(false);
+
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
 					},
-				});
-			}
-		}, 3000);
+				},
+			});
+		} else if (response.status === 200) {
+			setCheckIn(response.data);
+			setRoom(response.data.room);
+			setCustomer(response.data.customer);
+			setCheckOut({
+				...checkOut,
+				totalPrice: response.data.totalCost,
+				remains: response.data.remains,
+			});
+			setBase64String(
+				btoa(
+					new Uint8Array(response.data.room.picture.data.data).reduce(
+						function (data, byte) {
+							return data + String.fromCharCode(byte);
+						},
+						""
+					)
+				)
+			);
+		} else {
+			navigate("/transaction/checkin", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Failed",
+						message: response.message,
+					},
+				},
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -146,35 +153,43 @@ export default function CreateCheckoutPage() {
 
 		const response = await createCheckout(rest);
 
-		setTimeout(() => {
-			setIsLoading(false);
-			if (response.status === 201) {
-				navigate("/transaction/checkout", {
-					state: {
-						toastState: {
-							show: true,
-							title: "Success",
-							message: response.message,
-						},
+		setIsLoading(false);
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
 					},
-				});
-			} else {
+				},
+			});
+		} else if (response.status === 201) {
+			navigate("/transaction/checkout", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Success",
+						message: response.message,
+					},
+				},
+			});
+		} else {
+			setToastState({
+				...toastState,
+				show: true,
+				title: "Failed",
+				message: response.message,
+			});
+			setTimeout(() => {
 				setToastState({
 					...toastState,
-					show: true,
-					title: "Failed",
-					message: response.message,
+					show: false,
+					title: "",
+					message: "",
 				});
-				setTimeout(() => {
-					setToastState({
-						...toastState,
-						show: false,
-						title: "",
-						message: "",
-					});
-				}, 5000);
-			}
-		}, 1000);
+			}, 5000);
+		}
 	};
 
 	const handleCancel = () => {

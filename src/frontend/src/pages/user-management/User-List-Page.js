@@ -44,7 +44,17 @@ export default function UserListPage() {
 		const response = await getAllUser();
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			setUsers(response.data);
 		} else {
 			setToastState({
@@ -65,7 +75,7 @@ export default function UserListPage() {
 	};
 
 	useEffect(() => {
-		getUsers();
+		getUsers(); // eslint-disable-next-line
 	}, []);
 
 	const handleClickCreate = () => {
@@ -80,7 +90,17 @@ export default function UserListPage() {
 		setIsLoading(false);
 		setCurrentIndex(null);
 
-		if (response.status === 201) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 201) {
 			setToastState({
 				show: true,
 				title: "Success",
@@ -124,7 +144,7 @@ export default function UserListPage() {
 	};
 
 	useEffect(() => {
-		handleAfterCreateUser();
+		handleAfterCreateUser(); // eslint-disable-next-line
 	}, []);
 
 	const handleChangeSearch = (e) => {
@@ -147,7 +167,17 @@ export default function UserListPage() {
 		const response = await searchUser(search.category, search.query);
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			setUsers(response.data);
 		} else {
 			setToastState({
@@ -179,7 +209,17 @@ export default function UserListPage() {
 		const response = await deleteUser(id);
 
 		setIsLoading(false);
-		if (response.status === 204) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 204) {
 			setToastState({
 				show: true,
 				title: "Success",

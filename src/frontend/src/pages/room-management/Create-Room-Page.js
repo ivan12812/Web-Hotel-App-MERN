@@ -62,19 +62,17 @@ export default function CreateRoomPage() {
 
 		setIsLoading(false);
 
-		// if (response.status.includes('401')) {
-		// 	localStorage.removeItem('TOKEN');
-		// 	navigate('/login', {
-		// 		state: {
-		// 			toastState: {
-		// 				show: true,
-		// 				title: 'Session Expired',
-		// 				message: 'Your session has expired, please login',
-		// 			},
-		// 		},
-		// 	});
-		// } else
-		if (response.status === 201) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 201) {
 			navigate("/management/rooms", {
 				state: {
 					toastState: {

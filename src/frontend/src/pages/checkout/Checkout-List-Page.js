@@ -39,7 +39,17 @@ export default function CheckoutListPage() {
 		const data = await response.data;
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			setCheckouts(data);
 			setCheckoutsList(data);
 		} else {
@@ -61,7 +71,7 @@ export default function CheckoutListPage() {
 	};
 
 	useEffect(() => {
-		getCheckouts();
+		getCheckouts(); // eslint-disable-next-line
 	}, []);
 
 	const handleClickDetail = (data) => {
@@ -85,7 +95,7 @@ export default function CheckoutListPage() {
 	};
 
 	useEffect(() => {
-		handleAfterCheckout();
+		handleAfterCheckout(); // eslint-disable-next-line
 	}, []);
 
 	const handleChangeSearch = (e) => {
@@ -125,6 +135,8 @@ export default function CheckoutListPage() {
 						el.checkIn.customer.ID.toLowerCase().indexOf(
 							search.query.toLocaleLowerCase()
 						) > -1;
+					break;
+				default:
 					break;
 			}
 

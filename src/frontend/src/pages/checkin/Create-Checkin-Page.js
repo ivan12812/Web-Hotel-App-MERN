@@ -46,7 +46,17 @@ export default function CreateCheckinPage() {
 		const response = await getAvailableRooms();
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: response.message,
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			setRooms(response.data);
 		} else {
 			setToastState({
@@ -177,7 +187,17 @@ export default function CreateCheckinPage() {
 		// 		},
 		// 	});
 		// } else
-		if (response.status === 201) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 201) {
 			navigate("/transaction/checkin", {
 				state: {
 					toastState: {

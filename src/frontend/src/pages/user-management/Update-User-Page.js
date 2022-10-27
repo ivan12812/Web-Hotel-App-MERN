@@ -32,7 +32,17 @@ export default function UpdateUserPage() {
 		const response = await getUserById(id);
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			setUser({
 				...user,
 				...response.data,
@@ -55,7 +65,7 @@ export default function UpdateUserPage() {
 	};
 
 	useEffect(() => {
-		getUser();
+		getUser(); // eslint-disable-next-line
 	}, []);
 
 	const handleChange = (e) => {
@@ -88,19 +98,17 @@ export default function UpdateUserPage() {
 
 		setIsLoading(false);
 
-		// if (response.status.includes('401')) {
-		// 	localStorage.removeItem('TOKEN');
-		// 	navigate('/login', {
-		// 		state: {
-		// 			toastState: {
-		// 				show: true,
-		// 				title: 'Session Expired',
-		// 				message: 'Your session has expired, please login',
-		// 			},
-		// 		},
-		// 	});
-		// } else
-		if (response.status === 201) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 201) {
 			navigate("/management/users", {
 				state: {
 					toastState: {

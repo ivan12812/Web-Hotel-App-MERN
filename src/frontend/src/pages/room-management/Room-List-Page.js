@@ -45,7 +45,17 @@ export default function RoomListPage() {
 		const response = await getAllRooms();
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			setRooms(response.data);
 		} else {
 			setToastState({
@@ -65,7 +75,7 @@ export default function RoomListPage() {
 	};
 
 	useEffect(() => {
-		getRooms();
+		getRooms(); // eslint-disable-next-line
 	}, []);
 
 	const handleChangeStatus = async (id, index) => {
@@ -76,7 +86,17 @@ export default function RoomListPage() {
 		setIsLoading(false);
 		setCurrentIndex(null);
 
-		if (response.status === 201) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 201) {
 			setToastState({
 				show: true,
 				title: "Success",
@@ -120,7 +140,17 @@ export default function RoomListPage() {
 		const response = await searchRoom(search.category, search.query);
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			setRooms(response.data);
 		} else {
 			setToastState({
@@ -152,7 +182,17 @@ export default function RoomListPage() {
 
 		setIsLoading(false);
 
-		if (response.status === 204) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 204) {
 			setToastState({
 				show: true,
 				title: "Success",
@@ -196,7 +236,7 @@ export default function RoomListPage() {
 	};
 
 	useEffect(() => {
-		handleAfterCreateRoom();
+		handleAfterCreateRoom(); // eslint-disable-next-line
 	}, []);
 
 	const handleClickDetail = (room) => {

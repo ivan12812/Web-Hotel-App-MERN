@@ -46,7 +46,17 @@ export default function CheckinListPage() {
 		const data = await response.data;
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			setCheckins(data);
 		} else {
 			setToastState({
@@ -115,7 +125,17 @@ export default function CheckinListPage() {
 		const response = await searchCheckin(search.category, search.query);
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			setCheckins(response.data);
 		} else {
 			setToastState({
@@ -155,7 +175,17 @@ export default function CheckinListPage() {
 		const response = await updateCheckinStatus(checkin._id);
 
 		setIsLoading(false);
-		if (response.status === 201) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 201) {
 			setToastState({
 				...toastState,
 				show: true,

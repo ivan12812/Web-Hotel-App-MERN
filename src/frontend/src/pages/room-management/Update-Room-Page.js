@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MessageToast from "../../components/Message-Toast";
-import CreateRoomForm from "../../components/room-management/Create-Room-Form";
-import { createRoom, getRoomById, updateRoom } from "../../api/Room";
+import { getRoomById, updateRoom } from "../../api/Room";
 import Loader from "../../components/Loader";
 import UpdateRoomForm from "../../components/room-management/Update-Room-Form";
 
@@ -37,7 +36,17 @@ export default function UpdateRoomPage() {
 		const response = await getRoomById(id);
 
 		setIsFetching(false);
-		if (response.status === 200) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 200) {
 			let data = await response.data;
 
 			data["pictureFromDB"] = data.picture;
@@ -73,7 +82,7 @@ export default function UpdateRoomPage() {
 	};
 
 	useEffect(() => {
-		getRoomData();
+		getRoomData(); // eslint-disable-next-line
 	}, []);
 
 	const handleChange = (e) => {
@@ -141,19 +150,17 @@ export default function UpdateRoomPage() {
 
 		setIsLoading(false);
 
-		// if (response.status.includes('401')) {
-		// 	localStorage.removeItem('TOKEN');
-		// 	navigate('/login', {
-		// 		state: {
-		// 			toastState: {
-		// 				show: true,
-		// 				title: 'Session Expired',
-		// 				message: 'Your session has expired, please login',
-		// 			},
-		// 		},
-		// 	});
-		// } else
-		if (response.status === 201) {
+		if (response.status === 401) {
+			navigate("/login", {
+				state: {
+					toastState: {
+						show: true,
+						title: "Session has expired",
+						message: "Your session has expired, please login",
+					},
+				},
+			});
+		} else if (response.status === 201) {
 			navigate("/management/rooms", {
 				state: {
 					toastState: {
