@@ -76,7 +76,11 @@ export default function NavBar() {
 					</div>
 				</button>
 				<div className="container-fluid">
-					<Link className="navbar-brand" to="/" style={style.title}>
+					<Link
+						className="navbar-brand"
+						to="/transaction/checkin"
+						style={style.title}
+					>
 						Hotel App
 					</Link>
 					<button
@@ -93,6 +97,7 @@ export default function NavBar() {
 				show={show}
 				handleClose={handleClose}
 				role={userLoggedIn.role}
+				style={style}
 			/>
 		</>
 	);

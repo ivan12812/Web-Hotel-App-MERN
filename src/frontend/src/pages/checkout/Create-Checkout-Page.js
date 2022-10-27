@@ -14,8 +14,8 @@ export default function CreateCheckoutPage() {
 		remains: "",
 		late: {
 			isLate: false,
-			information: "",
-			fine: "",
+			information: "-",
+			fine: "-",
 		},
 	});
 
@@ -136,6 +136,12 @@ export default function CreateCheckoutPage() {
 		let { remains, ...rest } = checkOut;
 		rest["checkInId"] = checkIn._id;
 		rest["roomId"] = room._id;
+
+		if (!rest["late"]["isLate"]) {
+			rest["late"]["information"] = "No Information";
+			rest["late"]["fine"] = 0;
+		}
+
 		console.log(rest);
 
 		const response = await createCheckout(rest);

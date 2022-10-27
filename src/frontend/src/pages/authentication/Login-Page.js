@@ -42,7 +42,7 @@ export default function LoginPage() {
 			setIsLoading(false);
 			if (response.token) {
 				localStorage.setItem("TOKEN", `JWT ${response.token}`);
-				navigate("/");
+				navigate("/transaction/checkin");
 			} else {
 				setToastState({
 					...toastState,

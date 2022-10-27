@@ -8,7 +8,9 @@ export default function SideBar(props) {
 	return (
 		<Offcanvas show={props.show} onHide={props.handleClose}>
 			<Offcanvas.Header>
-				<Offcanvas.Title>Hotel App</Offcanvas.Title>
+				<Offcanvas.Title style={props.style.title}>
+					Hotel App
+				</Offcanvas.Title>
 			</Offcanvas.Header>
 			<Offcanvas.Body>
 				<Accordion flush>

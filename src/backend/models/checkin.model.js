@@ -54,7 +54,7 @@ exports.getAll = (query) => {
 					});
 				}
 			}
-		);
+		).sort({ checkInDate: "asc" });
 		//.limit(limit ? limit : 10)
 	});
 };

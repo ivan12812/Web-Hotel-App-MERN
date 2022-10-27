@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Badge, Modal } from "react-bootstrap";
 import { idrFormat } from "../../utils/Formatter";
 
-export default function DetailCheckoutModal(props) {
+export default function DetailCheckinModal(props) {
 	const [base64String, setBase64String] = useState("");
 
 	useEffect(() => {
@@ -21,69 +21,32 @@ export default function DetailCheckoutModal(props) {
 
 	return (
 		<Modal
-			show={props.openDetailCheckoutModal}
-			onHide={() => props.setOpenDetailCheckoutModal(false)}
+			show={props.openDetailCheckinModal}
+			onHide={() => props.setOpenDetailCheckinModal(false)}
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
 		>
 			<Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
-					Detail Checkout
+					Detail Checkin
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body style={{ padding: "20px 50px 50px 50px" }}>
 				<div className="row justify-content-between mb-3">
 					<div className="col-auto">
-						<h5>Checkout Information</h5>
-					</div>
-					<div className="col-auto">
-						<p>{`Checkout Date: ${new Date(
-							props.checkOut.checkOutDate
-						).toLocaleString()}`}</p>
-					</div>
-				</div>
-				<div className="row mb-3">
-					{props.checkOut.late.isLate && (
-						<div className="col">
-							<div className="mb-3">
-								<h6>Late</h6>
-								<p>
-									{props.checkOut.late.isLate ? "Yes" : "No"}
-								</p>
-							</div>
-							<div className="mb-3">
-								<h6>Late Information</h6>
-								<p>{props.checkOut.late.information}</p>
-							</div>
-							<div className="mb-3">
-								<h6>Late Fine</h6>
-								<p>{idrFormat(props.checkOut.late.fine)}</p>
-							</div>
-						</div>
-					)}
-					<div className="col">
-						<div className="mb-3">
-							<h6>Total Price</h6>
-							<p>{idrFormat(props.checkOut.totalPrice)}</p>
-						</div>
-						<div className="mb-3">
-							<h6>Repayment</h6>
-							<p>{idrFormat(props.checkOut.repayment)}</p>
-						</div>
-						<div className="mb-3">
-							<h6>Change</h6>
-							<p>{idrFormat(props.checkOut.change)}</p>
-						</div>
-					</div>
-				</div>
-				<hr />
-				<div className="row justify-content-between mb-3">
-					<div className="col-auto">
 						<h5>Checkin Information</h5>
 					</div>
 					<div className="col-auto">
-						<Badge bg={"success"}>{props.checkIn.status}</Badge>
+						{props.checkIn.status === "Checked In" ? (
+							<Badge pill bg="primary">
+								{props.checkIn.status}
+							</Badge>
+						) : (
+							<Badge pill bg="success">
+								{props.checkIn.status}
+							</Badge>
+						)}
 					</div>
 				</div>
 				<div className="row mb-3">
@@ -142,9 +105,15 @@ export default function DetailCheckoutModal(props) {
 								<h5>Billing Information</h5>
 							</div>
 							<div className="col-auto">
-								<Badge bg={"success"}>
-									{props.checkIn.paymentStatus}
-								</Badge>
+								{props.checkIn.paymentStatus === "Paid Off" ? (
+									<Badge pill bg="success">
+										{props.checkIn.paymentStatus}
+									</Badge>
+								) : (
+									<Badge pill bg="warning">
+										{props.checkIn.paymentStatus}
+									</Badge>
+								)}
 							</div>
 						</div>
 						<div className="mb-3">
@@ -205,7 +174,7 @@ export default function DetailCheckoutModal(props) {
 					<h5 className="mb-3">User In Charge</h5>
 					<div>
 						<h6>Username</h6>
-						<p>{props.checkOut.userInCharge}</p>
+						<p>{props.checkIn.userInCharge}</p>
 					</div>
 				</div>
 			</Modal.Body>

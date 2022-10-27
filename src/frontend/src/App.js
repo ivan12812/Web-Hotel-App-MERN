@@ -16,6 +16,8 @@ import UserListPage from "./pages/user-management/User-List-Page";
 import UpdateUserPage from "./pages/user-management/Update-User-Page";
 import CreateRoomPage from "./pages/room-management/Create-Room-Page";
 import UpdateRoomPage from "./pages/room-management/Update-Room-Page";
+import CheckinListPage from "./pages/checkin/Checkin-List-Page";
+import CreateCheckinPage from "./pages/checkin/Create-Checkin-Page";
 
 const Protected = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(
@@ -37,7 +39,11 @@ const AccessLoginPageHandler = () => {
 		localStorage.getItem("TOKEN")
 	);
 
-	return isAuthenticated ? <Navigate to="/" /> : <LoginPage />;
+	return isAuthenticated ? (
+		<Navigate to="/transaction/checkin" />
+	) : (
+		<LoginPage />
+	);
 };
 
 function App() {
@@ -46,16 +52,13 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Protected />}>
 					<Route path="transaction">
-						{/* <Route path="borrows">
-							<Route
-								index
-								element={<BorrowsListPage />}
-							/>
+						<Route path="checkin">
+							<Route index element={<CheckinListPage />} />
 							<Route
 								path="create"
-								element={<CreateBorrowPage />}
+								element={<CreateCheckinPage />}
 							/>
-						</Route> */}
+						</Route>
 						<Route path="checkout">
 							<Route index element={<CheckoutListPage />} />
 							<Route
