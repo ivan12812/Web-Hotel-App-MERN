@@ -79,7 +79,7 @@ export default function LoginPage() {
 	};
 
 	useEffect(() => {
-		handleAfterSignUp();
+		handleAfterSignUp(); // eslint-disable-next-line
 	}, []);
 
 	const style = {

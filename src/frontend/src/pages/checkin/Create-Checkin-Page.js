@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { createCheckin } from "../../api/Checkin";
 import { getAvailableRooms } from "../../api/Room";
 import CreateCheckinForm from "../../components/checkin/Create-Checkin-Form";
-import Loader from "../../components/Loader";
 import MessageToast from "../../components/Message-Toast";
 
 export default function CreateCheckinPage() {
@@ -68,7 +67,7 @@ export default function CreateCheckinPage() {
 	};
 
 	useEffect(() => {
-		getRooms();
+		getRooms(); // eslint-disable-next-line
 	}, []);
 
 	const handleChangeCheckin = (e) => {

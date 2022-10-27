@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getAllCheckout } from "../../api/Checkout";
 import Loader from "../../components/Loader";
 import MessageToast from "../../components/Message-Toast";
-import CheckoutListTable from "../../components/checkout/Checkout-List-Table";
 import NoData from "../../components/No-Data";
-import SearchBarCheckout from "../../components/checkout/Search-Bar-Checkout";
-import DetailCheckoutModal from "../../components/checkout/Detail-Checkout-Modal";
 import {
 	getAllCheckins,
 	searchCheckin,
@@ -71,7 +67,7 @@ export default function CheckinListPage() {
 	};
 
 	useEffect(() => {
-		getCheckins();
+		getCheckins(); // eslint-disable-next-line
 	}, []);
 
 	const handleClickDetail = (data) => {
@@ -95,7 +91,7 @@ export default function CheckinListPage() {
 	};
 
 	useEffect(() => {
-		handleAfterCheckIn();
+		handleAfterCheckIn(); // eslint-disable-next-line
 	}, []);
 
 	const handleChangeSearch = (e) => {

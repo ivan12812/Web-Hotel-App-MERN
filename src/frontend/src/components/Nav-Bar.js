@@ -30,7 +30,7 @@ export default function NavBar() {
 	};
 
 	useEffect(() => {
-		auth();
+		auth(); // eslint-disable-next-line
 	}, []);
 
 	const handleClose = () => setShow(false);

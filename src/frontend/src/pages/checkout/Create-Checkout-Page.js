@@ -79,7 +79,7 @@ export default function CreateCheckoutPage() {
 	};
 
 	useEffect(() => {
-		getCheckIn();
+		getCheckIn(); // eslint-disable-next-line
 	}, []);
 
 	const handleChange = (e) => {
@@ -307,7 +307,7 @@ export default function CreateCheckoutPage() {
 												<img
 													src={`data:image/png;base64,${base64String}`}
 													width={300}
-													alt="room picture"
+													alt="room preview"
 												/>
 											</div>
 											<div className="row mb-3">

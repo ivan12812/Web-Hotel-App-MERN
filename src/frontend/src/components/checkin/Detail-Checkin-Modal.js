@@ -141,7 +141,7 @@ export default function DetailCheckinModal(props) {
 						<img
 							src={`data:image/png;base64,${base64String}`}
 							width={400}
-							alt="room picture"
+							alt="room preview"
 						/>
 					</div>
 					<div className="row">

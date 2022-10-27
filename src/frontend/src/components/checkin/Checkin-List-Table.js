@@ -38,12 +38,12 @@ export default function CheckinListTable(props) {
 						props.checkins.map((el, index) => {
 							return (
 								<tr key={index}>
-									<td scope="row">
+									<td>
 										{new Date(
 											el.checkInDate
 										).toLocaleString()}
 									</td>
-									<td scope="row">
+									<td>
 										{new Date(el.dueDate).toLocaleString()}
 									</td>
 									<td>{el.room.roomNo}</td>

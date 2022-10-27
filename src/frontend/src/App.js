@@ -20,6 +20,7 @@ import CheckinListPage from "./pages/checkin/Checkin-List-Page";
 import CreateCheckinPage from "./pages/checkin/Create-Checkin-Page";
 
 const Protected = () => {
+	// eslint-disable-next-line
 	const [isAuthenticated, setIsAuthenticated] = useState(
 		localStorage.getItem("TOKEN")
 	);
@@ -35,6 +36,7 @@ const Protected = () => {
 };
 
 const AccessLoginPageHandler = () => {
+	// eslint-disable-next-line
 	const [isAuthenticated, setIsAuthenticated] = useState(
 		localStorage.getItem("TOKEN")
 	);
