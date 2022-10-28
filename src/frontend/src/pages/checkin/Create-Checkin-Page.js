@@ -77,7 +77,8 @@ export default function CreateCheckinPage() {
 	};
 
 	useEffect(() => {
-		getRooms(); // eslint-disable-next-line
+		getRooms();
+		document.title = "Create Check In"; // eslint-disable-next-line
 	}, []);
 
 	const handleChangeCheckin = (e) => {
@@ -175,18 +176,6 @@ export default function CreateCheckinPage() {
 		const response = await createCheckin(payload);
 
 		setIsLoading(false);
-		// if (response.status.includes("401")) {
-		// 	localStorage.removeItem("TOKEN");
-		// 	navigate("/login", {
-		// 		state: {
-		// 			toastState: {
-		// 				show: true,
-		// 				title: "Session Expired",
-		// 				message: "Your session has expired, please login",
-		// 			},
-		// 		},
-		// 	});
-		// } else
 		if (response.status === 401) {
 			navigate("/login", {
 				state: {

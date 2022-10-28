@@ -26,7 +26,7 @@ export default function SearchBarCheckin(props) {
 						name="query"
 						value={props.search.query}
 						onChange={props.handleChangeSearch}
-						placeholder={`Search Check In Data`}
+						placeholder={`Search check in data`}
 						style={props.style.input}
 					/>
 				</div>

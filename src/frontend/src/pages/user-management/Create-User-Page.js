@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CreteUserForm from "../../components/user-management/Create-User-Form";
 import { createUser } from "../../api/Users";
@@ -82,6 +82,10 @@ export default function CreateUserPage() {
 	const handleCancel = () => {
 		navigate("/management/users");
 	};
+
+	useEffect(() => {
+		document.title = "Create User";
+	}, []);
 
 	const style = {
 		page: {

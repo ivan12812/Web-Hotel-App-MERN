@@ -77,7 +77,8 @@ export default function CheckinListPage() {
 	};
 
 	useEffect(() => {
-		getCheckins(); // eslint-disable-next-line
+		getCheckins();
+		document.title = "Check In List"; // eslint-disable-next-line
 	}, []);
 
 	const handleClickDetail = (data) => {
@@ -254,7 +255,7 @@ export default function CheckinListPage() {
 							style={style.button}
 							onClick={() => handleClikCreate()}
 						>
-							Create Checkin
+							Create Check In
 						</button>
 					</div>
 				</div>

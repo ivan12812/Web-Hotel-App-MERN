@@ -18,7 +18,7 @@ export default function CheckoutListTable(props) {
 			<table className="table">
 				<thead>
 					<tr>
-						<th scope="col">Checkout Date</th>
+						<th scope="col">Check Out Date</th>
 						<th scope="col">Room No</th>
 						<th scope="col">Customer Name</th>
 						<th scope="col" className="text-center">

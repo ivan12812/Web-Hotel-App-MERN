@@ -122,7 +122,7 @@ export default function CreateCheckinForm(props) {
 				<div className="col">
 					<div className="card shadow" style={style.card}>
 						<div className="card-body">
-							<h5 className="card-title">Checkin Information</h5>
+							<h5 className="card-title">Check In Information</h5>
 							<div className="mb-3">
 								<label
 									htmlFor="lengthOfStay"
@@ -230,7 +230,7 @@ export default function CreateCheckinForm(props) {
 										<h5 className="mb-3">Summary</h5>
 										<div className="row justify-content-between mb-3">
 											<div className="col-6">
-												<h6>Checkin Date</h6>
+												<h6>Check In Date</h6>
 												<p>
 													{new Date().toLocaleString()}
 												</p>
@@ -307,7 +307,7 @@ export default function CreateCheckinForm(props) {
 												<hr />
 											</div>
 										</div>
-										<div className="row justify-content-end">
+										<div className="row justify-content-between">
 											<div className="col-auto">
 												<h6>Total Cost</h6>
 											</div>
@@ -322,7 +322,7 @@ export default function CreateCheckinForm(props) {
 												</strong>
 											</div>
 										</div>
-										<div className="row justify-content-end">
+										<div className="row justify-content-between">
 											<div className="col-auto">
 												<h6>Down Payment</h6>
 											</div>
@@ -340,7 +340,7 @@ export default function CreateCheckinForm(props) {
 												<hr />
 											</div>
 										</div>
-										<div className="row justify-content-end">
+										<div className="row justify-content-between">
 											<div className="col-auto">
 												<h6>Remains</h6>
 											</div>
@@ -368,7 +368,7 @@ export default function CreateCheckinForm(props) {
 												</p>
 											</div>
 										</div>
-										<div className="row justify-content-end">
+										<div className="row justify-content-between">
 											<div className="col-auto">
 												<h6>Change</h6>
 											</div>

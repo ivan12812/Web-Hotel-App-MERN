@@ -23,7 +23,7 @@ export default function SearchBarRoom(props) {
 						name="query"
 						value={props.search.query}
 						onChange={props.handleChangeSearch}
-						placeholder={`Search room`}
+						placeholder={`Search room data`}
 						style={props.style.input}
 					/>
 				</div>

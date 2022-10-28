@@ -24,7 +24,7 @@ export default function SearchBarCheckout(props) {
 						name="query"
 						value={props.search.query}
 						onChange={props.handleChangeSearch}
-						placeholder={`Search checkout`}
+						placeholder={`Search check out data`}
 						style={props.style.input}
 					/>
 				</div>

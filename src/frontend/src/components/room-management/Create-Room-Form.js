@@ -101,7 +101,7 @@ export default function CreateRoomForm(props) {
 					Facility
 				</label>
 				<textarea
-					rows="3"
+					rows="6"
 					className="form-control"
 					style={style.input}
 					id="facility"

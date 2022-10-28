@@ -104,6 +104,10 @@ export default function CreateRoomPage() {
 		navigate("/management/rooms");
 	};
 
+	useEffect(() => {
+		document.title = "Create Room";
+	}, []);
+
 	const style = {
 		page: {
 			padding: "30px",

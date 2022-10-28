@@ -21,7 +21,7 @@ export default function CheckinListTable(props) {
 			<table className="table">
 				<thead>
 					<tr>
-						<th scope="col">Checkin Date</th>
+						<th scope="col">Check In Date</th>
 						<th scope="col">Due Date</th>
 						<th scope="col">Room No</th>
 						<th scope="col">Customer Name</th>
@@ -106,7 +106,7 @@ export default function CheckinListTable(props) {
 																)
 															}
 														>
-															Checkout
+															Check Out
 														</button>
 													) : el.status ===
 													  "Checked In" ? (

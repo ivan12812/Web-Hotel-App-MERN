@@ -75,7 +75,8 @@ export default function UserListPage() {
 	};
 
 	useEffect(() => {
-		getUsers(); // eslint-disable-next-line
+		getUsers();
+		document.title = "Users List"; // eslint-disable-next-line
 	}, []);
 
 	const handleClickCreate = () => {

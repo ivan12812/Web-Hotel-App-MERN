@@ -24,7 +24,7 @@ export default function SearchBarUser(props) {
 						name="query"
 						value={props.search.query}
 						onChange={props.handleChangeSearch}
-						placeholder={`Search user by ${props.search.category}`}
+						placeholder={`Search user data`}
 						style={props.style.input}
 					/>
 				</div>

@@ -65,7 +65,8 @@ export default function UpdateUserPage() {
 	};
 
 	useEffect(() => {
-		getUser(); // eslint-disable-next-line
+		getUser();
+		document.title = "Update User"; // eslint-disable-next-line
 	}, []);
 
 	const handleChange = (e) => {

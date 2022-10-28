@@ -79,7 +79,8 @@ export default function LoginPage() {
 	};
 
 	useEffect(() => {
-		handleAfterSignUp(); // eslint-disable-next-line
+		handleAfterSignUp();
+		document.title = "Log In"; // eslint-disable-next-line
 	}, []);
 
 	const style = {
@@ -135,7 +136,7 @@ export default function LoginPage() {
 				</div>
 				<div className="col-md-5 col-sm-12">
 					<h3 className="mb-md-5 mb-sm-3" style={style.title}>
-						Login Hotel App
+						Log In Hotel App
 					</h3>
 					<form onSubmit={handleLogIn} className="mb-5">
 						<div className="mb-3">
@@ -200,7 +201,7 @@ export default function LoginPage() {
 										credential.password === ""
 									}
 								>
-									Login
+									Log In
 								</button>
 							</div>
 						)}

@@ -82,7 +82,8 @@ export default function UpdateRoomPage() {
 	};
 
 	useEffect(() => {
-		getRoomData(); // eslint-disable-next-line
+		getRoomData();
+		document.title = "Update Room"; // eslint-disable-next-line
 	}, []);
 
 	const handleChange = (e) => {

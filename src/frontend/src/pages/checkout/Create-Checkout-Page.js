@@ -86,7 +86,8 @@ export default function CreateCheckoutPage() {
 	};
 
 	useEffect(() => {
-		getCheckIn(); // eslint-disable-next-line
+		getCheckIn();
+		document.title = "Create Check Out"; // eslint-disable-next-line
 	}, []);
 
 	const handleChange = (e) => {
@@ -395,7 +396,7 @@ export default function CreateCheckoutPage() {
 												</div>
 											</div>
 											<hr />
-											<div className="row mb-3">
+											<div className="mb-3">
 												<div className="form-check form-switch">
 													<input
 														className="form-check-input"
@@ -407,10 +408,12 @@ export default function CreateCheckoutPage() {
 															checkOut.late.isLate
 														}
 														onChange={handleChange}
+														style={style.input}
 													/>
 													<label
 														className="form-check-label"
 														htmlFor="isLate"
+														style={style.label}
 													>
 														Late
 													</label>

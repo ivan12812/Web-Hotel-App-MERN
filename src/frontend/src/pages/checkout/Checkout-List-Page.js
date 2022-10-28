@@ -71,7 +71,8 @@ export default function CheckoutListPage() {
 	};
 
 	useEffect(() => {
-		getCheckouts(); // eslint-disable-next-line
+		getCheckouts();
+		document.title = "Check Out List"; // eslint-disable-next-line
 	}, []);
 
 	const handleClickDetail = (data) => {
@@ -181,7 +182,7 @@ export default function CheckoutListPage() {
 	return (
 		<div className="min-vh-100" style={style.page}>
 			<div className="container">
-				<h3 style={style.title}>Checkout List</h3>
+				<h3 style={style.title}>Check Out List</h3>
 				<div className="mb-3">
 					<SearchBarCheckout
 						search={search}

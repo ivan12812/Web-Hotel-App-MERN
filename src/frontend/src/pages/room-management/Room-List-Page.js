@@ -75,7 +75,8 @@ export default function RoomListPage() {
 	};
 
 	useEffect(() => {
-		getRooms(); // eslint-disable-next-line
+		getRooms();
+		document.title = "Rooms List"; // eslint-disable-next-line
 	}, []);
 
 	const handleChangeStatus = async (id, index) => {

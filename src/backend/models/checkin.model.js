@@ -3,18 +3,25 @@ const roomModel = require("./room.model");
 
 exports.create = (data, roomId) => {
 	return new Promise((resolve, reject) => {
-		new schema.CheckInSchema(data).save((err, response) => {
-			if (err) {
-				reject(err);
+		roomModel.getById(roomId).then((res) => {
+			console.log(res.status);
+			if (res.status === "Not Available") {
+				reject("This room is not available");
 			} else {
-				roomModel
-					.editStatus(roomId)
-					.then(() => {
-						resolve(response);
-					})
-					.catch((error) => {
-						reject(error);
-					});
+				new schema.CheckInSchema(data).save((err, response) => {
+					if (err) {
+						reject(err);
+					} else {
+						roomModel
+							.editStatus(roomId)
+							.then(() => {
+								resolve(response);
+							})
+							.catch((error) => {
+								reject(error);
+							});
+					}
+				});
 			}
 		});
 	});
@@ -54,7 +61,7 @@ exports.getAll = (query) => {
 					});
 				}
 			}
-		).sort({ checkInDate: "asc" });
+		).sort({ checkInDate: "desc" });
 		//.limit(limit ? limit : 10)
 	});
 };

@@ -29,21 +29,25 @@ export default function DetailCheckinModal(props) {
 		>
 			<Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
-					Detail Checkin
+					Detail Check In
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body style={{ padding: "20px 50px 50px 50px" }}>
 				<div className="row justify-content-between mb-3">
 					<div className="col-auto">
-						<h5>Checkin Information</h5>
+						<h5>Check In Information</h5>
 					</div>
 					<div className="col-auto">
 						{props.checkIn.status === "Checked In" ? (
 							<Badge pill bg="primary">
 								{props.checkIn.status}
 							</Badge>
-						) : (
+						) : props.checkIn.status === "Done" ? (
 							<Badge pill bg="success">
+								{props.checkIn.status}
+							</Badge>
+						) : (
+							<Badge pill bg="secondary">
 								{props.checkIn.status}
 							</Badge>
 						)}
@@ -52,7 +56,7 @@ export default function DetailCheckinModal(props) {
 				<div className="row mb-3">
 					<div className="col">
 						<div className="mb-3">
-							<h6>Checkin Date</h6>
+							<h6>Check In Date</h6>
 							<p>
 								{new Date(
 									props.checkIn.checkInDate
