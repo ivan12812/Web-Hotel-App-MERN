@@ -37,7 +37,7 @@ export default function LoginPage() {
 		e.preventDefault();
 
 		const response = await logIn(credential);
-		console.log(response);
+
 		setTimeout(() => {
 			setIsLoading(false);
 			if (response.token) {
@@ -64,7 +64,6 @@ export default function LoginPage() {
 
 	const handleAfterSignUp = () => {
 		if (location.state) {
-			console.log(location.state);
 			setToastState(location.state.toastState);
 			window.history.replaceState({}, document.title);
 			setTimeout(() => {

@@ -150,8 +150,6 @@ export default function CreateCheckoutPage() {
 			rest["late"]["fine"] = 0;
 		}
 
-		console.log(rest);
-
 		const response = await createCheckout(rest);
 
 		setIsLoading(false);

@@ -171,8 +171,6 @@ export default function CreateCheckinPage() {
 		payload["roomNo"] = selectedRoom.roomNo;
 		payload["roomId"] = selectedRoom.room._id;
 
-		console.log(payload);
-
 		const response = await createCheckin(payload);
 
 		setIsLoading(false);

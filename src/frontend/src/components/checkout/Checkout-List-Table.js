@@ -31,7 +31,7 @@ export default function CheckoutListTable(props) {
 						props.checkouts.map((el, index) => {
 							return (
 								<tr key={index}>
-									<td scope="row">
+									<td>
 										{new Date(
 											el.checkOutDate
 										).toLocaleString()}

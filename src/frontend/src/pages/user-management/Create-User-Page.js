@@ -36,7 +36,6 @@ export default function CreateUserPage() {
 		setIsLoading(true);
 		e.preventDefault();
 
-		console.log(user);
 		const response = await createUser(user);
 
 		setIsLoading(false);
