@@ -30,10 +30,14 @@ exports.authenticate = (data) => {
 							name: response.name,
 							role: response.role,
 						};
-						const token = jwt.sign(data, process.env.SECRET_KEY, {
-							expiresIn: "1800s",
-							algorithm: "HS256",
-						});
+						const token = jwt.sign(
+							data,
+							"t7w!z%C*F-JaNdRgUkXp2r5u8x/A?D(G+KbPeShVmYq3t6v9y$B&E)H@McQfTjWn",
+							{
+								expiresIn: "1800s",
+								algorithm: "HS256",
+							}
+						);
 						resolve(token);
 					} else {
 						reject("Your account is inactive");
@@ -50,12 +54,16 @@ exports.authenticate = (data) => {
 
 exports.authToken = (token) => {
 	return new Promise((resolve, reject) => {
-		jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(user);
+		jwt.verify(
+			token,
+			"t7w!z%C*F-JaNdRgUkXp2r5u8x/A?D(G+KbPeShVmYq3t6v9y$B&E)H@McQfTjWn",
+			(err, user) => {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(user);
+				}
 			}
-		});
+		);
 	});
 };
