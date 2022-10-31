@@ -33,7 +33,7 @@ export default function DeleteUserModal(props) {
 					</div>
 					<div className="col-auto">
 						<button
-							className="btn btn-outline-danger"
+							className="btn btn-danger"
 							onClick={() => {
 								props.setDeleteUserModalState(false);
 								props.handleDeleteUser(props.user._id);

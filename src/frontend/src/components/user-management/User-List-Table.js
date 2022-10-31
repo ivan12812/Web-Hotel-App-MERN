@@ -54,7 +54,7 @@ export default function UserListTable(props) {
 											<div className="row justify-content-center">
 												<div className="col-auto">
 													<button
-														className="btn btn-outline-warning"
+														className="btn btn-warning"
 														style={style.button}
 														onClick={() =>
 															props.handleChangeStatus(
@@ -68,7 +68,7 @@ export default function UserListTable(props) {
 												</div>
 												<div className="col-auto">
 													<button
-														className="btn btn-outline-warning"
+														className="btn btn-warning"
 														style={style.iconButton}
 														onClick={() =>
 															props.handleUpdateUser(
@@ -81,7 +81,7 @@ export default function UserListTable(props) {
 												</div>
 												<div className="col-auto">
 													<button
-														className="btn btn-outline-danger"
+														className="btn btn-danger"
 														style={style.iconButton}
 														onClick={() =>
 															props.handleClickDelete(

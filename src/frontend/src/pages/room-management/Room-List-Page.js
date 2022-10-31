@@ -287,7 +287,7 @@ export default function RoomListPage() {
 					</div>
 					<div className="col-auto">
 						<button
-							className="btn btn-outline-primary shadow"
+							className="btn btn-primary shadow"
 							style={style.button}
 							onClick={() => handleClickCreate()}
 						>

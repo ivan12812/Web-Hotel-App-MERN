@@ -55,7 +55,7 @@ export default function RoomListTable(props) {
 											<div className="row justify-content-center">
 												<div className="col-auto">
 													<button
-														className="btn btn-outline-info"
+														className="btn btn-info"
 														style={style.iconButton}
 														onClick={() =>
 															props.handleClickDetail(
@@ -68,7 +68,7 @@ export default function RoomListTable(props) {
 												</div>
 												<div className="col-auto">
 													<button
-														className="btn btn-outline-warning"
+														className="btn btn-warning"
 														style={style.button}
 														onClick={() =>
 															props.handleChangeStatus(
@@ -82,7 +82,7 @@ export default function RoomListTable(props) {
 												</div>
 												<div className="col-auto">
 													<button
-														className="btn btn-outline-warning"
+														className="btn btn-warning"
 														style={style.iconButton}
 														onClick={() =>
 															props.handleClickUpdate(
@@ -95,7 +95,7 @@ export default function RoomListTable(props) {
 												</div>
 												<div className="col-auto">
 													<button
-														className="btn btn-outline-danger"
+														className="btn btn-danger"
 														style={style.iconButton}
 														onClick={() =>
 															props.handleClickDelete(

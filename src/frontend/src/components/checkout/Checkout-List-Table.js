@@ -40,7 +40,7 @@ export default function CheckoutListTable(props) {
 									<td>{el.checkIn.customer.name}</td>
 									<td className="text-center">
 										<button
-											className="btn btn-outline-info"
+											className="btn btn-info"
 											style={style.iconButton}
 											onClick={() =>
 												props.handleClickDetail(el)

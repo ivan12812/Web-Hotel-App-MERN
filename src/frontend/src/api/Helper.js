@@ -1,3 +1,3 @@
-const BASE_URL = "https://hotel-app-project-backend.vercel.app/api";
+const BASE_URL = "http://localhost:3001/api";
 
 export { BASE_URL };

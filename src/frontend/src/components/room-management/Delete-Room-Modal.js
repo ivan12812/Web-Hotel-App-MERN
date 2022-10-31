@@ -33,7 +33,7 @@ export default function DeleteRoomModal(props) {
 					</div>
 					<div className="col-auto">
 						<button
-							className="btn btn-outline-danger"
+							className="btn btn-danger"
 							onClick={() => {
 								props.setDeleteRoomModalState(false);
 								props.handleDeleteRoom(props.room._id);

@@ -2,9 +2,22 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Accordion from "react-bootstrap/Accordion";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-import { CCircleFill, HeartFill } from "react-bootstrap-icons";
+import { CCircleFill, HeartFill, BoxArrowRight } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
 export default function SideBar(props) {
+	const navigate = useNavigate();
+
+	const handleSignOut = () => {
+		localStorage.removeItem("TOKEN");
+		navigate("/login");
+	};
+
+	const style = {
+		signOutButton: {
+			borderRadius: "15px",
+		},
+	};
 	return (
 		<Offcanvas show={props.show} onHide={props.handleClose}>
 			<Offcanvas.Header>
@@ -93,6 +106,15 @@ export default function SideBar(props) {
 					</Accordion.Item> */}
 				</Accordion>
 			</Offcanvas.Body>
+			<div className="d-grid gap-2" style={{ padding: "10px" }}>
+				<button
+					className="btn btn-danger"
+					style={style.signOutButton}
+					onClick={() => handleSignOut()}
+				>
+					<BoxArrowRight size={16} /> Sign Out
+				</button>
+			</div>
 			<div
 				className="text-center"
 				style={{ padding: "10px", color: "#3F72AF" }}

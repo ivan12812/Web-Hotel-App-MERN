@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { List, BoxArrowRight } from "react-bootstrap-icons";
+import { List } from "react-bootstrap-icons";
 import SideBar from "./Side-Bar";
 import { useEffect, useState } from "react";
 import { checkToken } from "../api/Authentication";
@@ -36,11 +36,6 @@ export default function NavBar() {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-	const handleSignOut = () => {
-		localStorage.removeItem("TOKEN");
-		navigate("/login");
-	};
-
 	const style = {
 		container: {
 			borderBottomRightRadius: "10px",
@@ -53,9 +48,6 @@ export default function NavBar() {
 		},
 		menuButton: {
 			border: "none",
-		},
-		signOutButton: {
-			borderRadius: "15px",
 		},
 	};
 
@@ -83,13 +75,6 @@ export default function NavBar() {
 					>
 						Hotel App
 					</Link>
-					<button
-						className="btn btn-outline-danger"
-						style={style.signOutButton}
-						onClick={() => handleSignOut()}
-					>
-						<BoxArrowRight size={16} /> Sign Out
-					</button>
 				</div>
 			</nav>
 

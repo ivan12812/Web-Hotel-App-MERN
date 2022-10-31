@@ -83,7 +83,7 @@ export default function CheckinListTable(props) {
 											<div className="row justify-content-center">
 												<div className="col-auto">
 													<button
-														className="btn btn-outline-info"
+														className="btn btn-info"
 														style={style.iconButton}
 														onClick={() =>
 															props.handleClickDetail(
